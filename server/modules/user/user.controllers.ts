@@ -66,7 +66,7 @@ export const deleteUserController = async (req: Request, res: Response) => {
 
         logger.info(`Deleted user data successfully with ID: ${id}`)
 
-        res.status(2001).json({ message: "User account deleted." });
+        res.status(200).json({ message: "User account deleted." });
 
     } catch (error) {
         logger.error(error, "Error deleting user")

@@ -80,7 +80,7 @@ export const deletePostController = async (req: Request, res: Response) => {
 
         logger.info(`Deleted post data successfully with ID: ${id}`)
 
-        res.status(2001).json({ message: "Post deleted." });
+        res.status(201).json({ message: "Post deleted." });
 
     } catch (error) {
         logger.error(error, "Error deleting post")
