@@ -12,13 +12,21 @@ export const isAuth = (req: Request, res: Response, next: NextFunction) => {
         const authHeader = req.get('Authorization')
 
         if (!authHeader) {
-            throw new Error("Unauthorized");
+            logger.error("Unauthorized request")
+            res.status(401).json({
+                message: "Unauthorized"
+            })
+            return;
         }
 
         const token = authHeader.split(' ')[1]
 
         if (!token || token === '') {
-            throw new Error("Unauthorized");
+            logger.error("Unauthorized request")
+            res.status(401).json({
+                message: "Unauthorized"
+            })
+            return;
         }
 
         const decodedToken: any = jwt.verify(token, SECRET_KEY);

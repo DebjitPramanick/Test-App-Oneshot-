@@ -35,14 +35,14 @@ export const getPostByIDController = async (req: Request, res: Response) => {
         const post: any = await getPostHelper(id);
 
         if (!post) {
-            logger.info(`No post found with ID: ${id}`)
+            logger.error(`No post found with ID: ${id}`)
             res.status(404).json({ message: "Post not found." });
             return;
         }
 
         logger.info(`Found post successfully with ID: ${id}`)
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Post found.",
             post: post
         });
@@ -62,7 +62,7 @@ export const getAllPostsController = async (req: Request, res: Response) => {
 
         logger.info(`Fetched all posts`)
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Fetched all posts.",
             posts: posts
         });

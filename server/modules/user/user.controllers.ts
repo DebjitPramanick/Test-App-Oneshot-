@@ -48,7 +48,7 @@ export const getUserByIDController = async (req: Request, res: Response) => {
 
         logger.info(`Found user successfully with ID: ${user._id}`)
 
-        res.status(201).json({
+        res.status(200).json({
             message: "User found.",
             user: user
         });
