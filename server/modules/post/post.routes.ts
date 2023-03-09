@@ -1,6 +1,6 @@
 import { isAuth } from "../../middlewares/auth"
 import { createPostController, deletePostController, getAllPostsController, getPostByIDController } from "./post.controllers"
-const express = require('express')
+import express from 'express'
 
 const postRouter = express.Router()
 

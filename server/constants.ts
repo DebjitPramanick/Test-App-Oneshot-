@@ -1,4 +1,4 @@
-const dotenv = require('dotenv')
+import dotenv from 'dotenv'
 dotenv.config()
 
 export const CROSS_ORIGIN = process.env.NODE_ENV === "development" ? "http://localhost:3000/" : process.env.CROSS_ORIGIN

@@ -1,6 +1,6 @@
 import { isAuth } from "../../middlewares/auth"
 import { createUserController, deleteUserController, getUserByIDController } from "./user.controllers"
-const express = require('express')
+import express from 'express'
 
 const userRouter = express.Router()
 

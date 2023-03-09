@@ -4,8 +4,8 @@ import { connectDB } from "./helpers/db.helper";
 import postRouter from "./modules/post/post.routes";
 import userRouter from "./modules/user/user.routes";
 import logger from "./utils/logger.util";
-const express = require("express")
-const cors = require('cors')
+import express from "express";
+import cors from 'cors';
 
 const app = express()
 app.use(cors({
