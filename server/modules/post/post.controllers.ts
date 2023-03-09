@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
+import {ObjectId} from 'mongodb'
 import logger from "../../utils/logger.util";
 import { createPostHelper, deletePostHelper, getPostHelper } from "./post.helpers";
 
 export const createPostController = async (req: Request, res: Response) => {
     try {
-        const { img, name, email, isAdmin } = req.body;
+        const { title, content, user } = req.body;
 
         const data = {
-            profile_pic: img,
-            name: name,
-            email: email,
-            isAdmin: isAdmin
+            title: title,
+            content: content,
+            user: new ObjectId(user),
         }
         const post: any = await createPostHelper(data);
 
@@ -37,6 +37,7 @@ export const getPostByIDController = async (req: Request, res: Response) => {
         if (!post) {
             logger.info(`No post found with ID: ${id}`)
             res.status(404).json({ message: "Post not found." });
+            return;
         }
 
         logger.info(`Found post successfully with ID: ${id}`)
@@ -55,7 +56,7 @@ export const getPostByIDController = async (req: Request, res: Response) => {
 
 export const getAllPostsController = async (req: Request, res: Response) => {
     try {
-        const {page} = req.params;
+        const {page} = req.query;
 
         const posts: any = await getPostHelper(undefined, Number(page));
 
@@ -76,11 +77,20 @@ export const getAllPostsController = async (req: Request, res: Response) => {
 export const deletePostController = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
+
+        const {isAdmin, userId}: any = (req as any).token
+
+        if(!isAdmin) {
+            logger.error(`Post was not deleted by unauthorized user with ID: ${userId}`)
+            res.status(404).json({ message: "You are not authorized to delete the post." });
+            return;
+        }
+
         await deletePostHelper(id);
 
         logger.info(`Deleted post data successfully with ID: ${id}`)
 
-        res.status(201).json({ message: "Post deleted." });
+        res.status(200).json({ message: "Post deleted." });
 
     } catch (error) {
         logger.error(error, "Error deleting post")

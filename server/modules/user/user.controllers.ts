@@ -43,6 +43,7 @@ export const getUserByIDController = async (req: Request, res: Response) => {
         if (!user) {
             logger.info(`No user found with ID: ${id}`)
             res.status(404).json({ message: "User not found." });
+            return;
         }
 
         logger.info(`Found user successfully with ID: ${user._id}`)

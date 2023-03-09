@@ -15,4 +15,4 @@ export const DB_NAME = process.env.DATABASE_NAME || "";
 
 export const ENV = process.env.NODE_ENV
 
-export const POSTS_LIMIT = 10;
+export const POSTS_LIMIT = 5;

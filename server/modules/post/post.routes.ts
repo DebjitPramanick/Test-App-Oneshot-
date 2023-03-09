@@ -4,9 +4,9 @@ const express = require('express')
 
 const postRouter = express.Router()
 
-postRouter.post("/create", createPostController)
+postRouter.post("/create", isAuth, createPostController)
+postRouter.get("/all", getAllPostsController)
 postRouter.get("/:id", isAuth, getPostByIDController)
-postRouter.get("/all", isAuth, getAllPostsController)
 postRouter.delete("/delete/:id", isAuth, deletePostController)
 
 export default postRouter
