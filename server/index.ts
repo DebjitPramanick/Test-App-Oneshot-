@@ -1,0 +1,27 @@
+import { json, Request, Response } from "express";
+import { CROSS_ORIGIN, PORT } from "./constants";
+import { connectDB } from "./helpers/db.helper";
+import userRouter from "./modules/user/user.routes";
+import logger from "./utils/logger.util";
+const express = require("express")
+const cors = require('cors')
+
+const app = express()
+app.use(cors({
+    origin: CROSS_ORIGIN,
+}))
+app.use(json())
+
+connectDB()
+
+app.use("/api/user", userRouter)
+
+app.get("/", (req: Request, res: Response) => {
+    res.status(200).json({
+        message: "Server is running."
+    })
+})
+
+app.listen(PORT, () => {
+    logger.info("Server is running")
+})
