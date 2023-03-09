@@ -1,18 +1,23 @@
 import { Request, Response } from "express";
-import { generateToken, createUserHelper, getUserHelper, deleteUserHelper } from "./user.helper";
+import { generateToken, createUserHelper, getUserHelper, deleteUserHelper } from "./user.helpers";
 import logger from "../../utils/logger.util";
 
 export const createUserController = async (req: Request, res: Response) => {
     try {
-        const { name, email, password } = req.body;
+        const { img, name, email, isAdmin } = req.body;
 
         const data = {
+            profile_pic: img,
             name: name,
             email: email,
-            passHash: password
+            isAdmin: isAdmin
         }
         const user: any = await createUserHelper(data);
-        const accessToken = await generateToken({ userId: user._id, email: user.email });
+        const accessToken = await generateToken({
+            userId: user._id,
+            email: user.email,
+            isAdmin: false
+        });
 
         logger.info(`Registered user successfully with ID: ${user._id}`)
 
@@ -32,15 +37,15 @@ export const createUserController = async (req: Request, res: Response) => {
 
 export const getUserByIDController = async (req: Request, res: Response) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const user: any = await getUserHelper(id);
 
-        if(!user) {
+        if (!user) {
             logger.info(`No user found with ID: ${id}`)
-            res.status(404).json({message: "User not found."});
+            res.status(404).json({ message: "User not found." });
         }
 
-        logger.info(`Registered user successfully with ID: ${user._id}`)
+        logger.info(`Found user successfully with ID: ${user._id}`)
 
         res.status(201).json({
             message: "User found.",
@@ -56,12 +61,12 @@ export const getUserByIDController = async (req: Request, res: Response) => {
 
 export const deleteUserController = async (req: Request, res: Response) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         await deleteUserHelper(id);
 
         logger.info(`Deleted user data successfully with ID: ${id}`)
 
-        res.status(2001).json({message: "User account deleted."});
+        res.status(2001).json({ message: "User account deleted." });
 
     } catch (error) {
         logger.error(error, "Error deleting user")

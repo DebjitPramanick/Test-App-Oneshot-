@@ -28,7 +28,7 @@ export const deleteUserHelper = async (userId: any) => {
     }
 }
 
-export const generateToken = async (data: {email: string, userId: string}) => {
+export const generateToken = async (data: {email: string, userId: string, isAdmin: boolean}) => {
     const token = jwt.sign(data, SECRET_KEY, {expiresIn: TOKEN_EXP});
     return token;
 }
