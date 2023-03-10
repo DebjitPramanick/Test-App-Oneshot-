@@ -17,6 +17,15 @@ export const SmallText = styled.p`
     overflow: hidden;
 `
 
+export const LargeText = styled.p`
+    font-style: normal;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: ${props => props.theme.text};
+    text-overflow: ellipsis;
+    overflow: hidden;
+`
+
 export const Heading = styled.h1`
     font-style: normal;
     font-size: 30px;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Flex } from '../../Styled/Shared';
 import { Overlay, PopupContainer, PopupBody } from './styles';
-import { AiFillCloseCircle } from 'react-icons/ai'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Button, Input, TextArea } from '../../Styled/Form';
 import { SubHeading } from '../../Styled/Typography';
 
@@ -26,7 +26,7 @@ const PostFormPopUpUI: React.FC<PropsType> = ({
                 <PopupBody>
                     <Flex style={{ justifyContent: 'space-between', borderBottom: '1px solid #cfcfcf', padding: '16px' }}>
                         <SubHeading>Create Post</SubHeading>
-                        <AiFillCloseCircle size={30} cursor="pointer" onClick={closePopup} />
+                        <AiOutlineCloseCircle size={30} cursor="pointer" onClick={closePopup} />
                     </Flex>
 
                     <div style={{ padding: '16px' }}>

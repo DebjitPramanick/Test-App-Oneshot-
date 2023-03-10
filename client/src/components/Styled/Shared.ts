@@ -11,6 +11,7 @@ export const Avatar = styled.div<{src: string, width: number}>`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer
 `
 
 export const Flex = styled.div`

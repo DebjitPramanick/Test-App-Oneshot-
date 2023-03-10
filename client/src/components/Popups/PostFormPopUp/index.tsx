@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { createPost } from '../../../api/post.api';
-import { useThemeMode } from '../../../contexts/ThemeModeContext';
+import { useUser } from '../../../contexts/UserContext';
 import PostFormPopUpUI from './PostFormPopUpUI';
 
 interface PropsType {
@@ -25,11 +25,12 @@ const PostFormPopUp: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
 
   const [uploading, setUploading] = useState(false);
   const [postData, setPostData] = useState<PostData>(initialPost)
+  const { user } = useUser()
 
   const uploadPostData = async () => {
     setUploading(true)
     try {
-      const data = {...postData, user: '6409f5b055594ae33ff0dec5'}
+      const data = { ...postData, user: user._id }
       await createPost(data);
       await refetchPosts()
       setUploading(false)
@@ -45,7 +46,7 @@ const PostFormPopUp: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
   }
 
   const handlePostData = (val: string, field: 'title' | 'content') => {
-    const newData = {...postData, [field]: val}
+    const newData = { ...postData, [field]: val }
     setPostData(newData)
   }
 

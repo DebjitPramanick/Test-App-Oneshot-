@@ -2,28 +2,25 @@ import styled from "styled-components";
 
 export const HeaderContaier = styled.div`
     position: fixed;
-    height: 97px;
+    height: 60px;
     top: 0;
     right: 0;
     left: 0;
-    background: ${props => props.theme.headerBackground};
+    background: ${props => props.theme.headerBackground || 'white'};
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 99;
-
-    @media(max-width: 900px) {
-        height: 70px;
-    }
 `
 
 export const HeaderContent = styled.div`
-    width:1200px;
+    width: 900px;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    position: relative;
 
     .header-search-container {
         @media(max-width: 500px) {
@@ -53,21 +50,22 @@ export const HeaderContent = styled.div`
         }
     }
 
-    @media(max-width: 1210px) {
-        width: calc(100% - 32px);
-    }
+    // @media(max-width: 910px) {
+    //     width: calc(100% - 32px);
+    // }
 
     
 `
 
 export const FloatingContainer = styled.div<{height: string}>`
     position: absolute;
-    background: ${props => props.theme.headerBackground};
-    top: 70px;
-    left: 0;
+    background: ${props => props.theme.headerBackground || '#fff'};
+    top: 40px;
+    width: 300px;
     right: 0;
     overflow: hidden;
-    padding: 0 16px;
+    box-shadow: 0 0 10px #d2d2d2;
+    border-radius: 4px;
 
     &.expand{
         height: ${(props: any) => props.height};
@@ -78,62 +76,8 @@ export const FloatingContainer = styled.div<{height: string}>`
         height: 0;
         transition: 0.5s;
     }
-`
 
-export const PageLinks = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 30px;
-
-    a {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 12px;
-        line-height: 15px;
-        color: ${props => props.theme.headerText};
-        text-decoration: none;
-    }
-
-    &.mobile {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-
-        @media(max-width: 1000px) {
-            display: flex;
-        }
-    }
-
-    @media(max-width: 1042px) {
-        display: none;
-    }
-`
-
-export const ThemeController = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    p{
-        font-style: normal;
-        font-weight: 700;
-        font-size: 12px;
-        line-height: 15px;
-        color: ${props => props.theme.headerText};
-        text-decoration: none;
-        white-space: nowrap;
-    }
-
-    &.mobile {
-        justify-content: space-between;
-        margin-top: 20px;
-
-        @media(max-width: 1000px) {
-            display: flex;
-        }
-    }
-
-    @media(max-width: 1042px) {
-        display: none;
+    .floating-container-content {
+        padding: 16px;
     }
 `

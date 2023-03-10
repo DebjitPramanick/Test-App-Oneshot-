@@ -29,8 +29,8 @@ export const AuthPageLayout = styled.div`
 `
 
 export const PageLayout = styled.div`
-    margin: 97px auto;
-    max-width: 1200px;
+    margin: 70px auto;
+    max-width: 900px;
 
     @media(max-width: 900px) {
         margin: 70px auto;

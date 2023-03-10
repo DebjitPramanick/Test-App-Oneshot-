@@ -47,6 +47,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(userData)
         localStorage.setItem(cacheUserKey, JSON.stringify(userData))
         localStorage.setItem(cacheTokenKey, token)
+        console.log("LOCAL DONE")
     }
 
 
@@ -54,8 +55,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         try {
             if (user && user._id) {
                 const res = await getUser(user._id);
-                console.log("USER", res)
-                const userData = res.data;
+                const userData = res.data.user;
                 setUser(userData)
                 localStorage.setItem(cacheUserKey, JSON.stringify(userData))
             }

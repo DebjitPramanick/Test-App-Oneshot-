@@ -2,7 +2,11 @@ import React from 'react'
 import PostFormPopUp from '../../components/Popups/PostFormPopUp'
 import { Button } from '../../components/Styled/Form'
 import { PageLayout } from '../../components/Styled/Layout'
-import PostCardUI from './components/PostCard/PostCardUI'
+import { Avatar } from '../../components/Styled/Shared'
+import { Text } from '../../components/Styled/Typography'
+import { useUser } from '../../contexts/UserContext'
+import PostCard from './components/PostCard'
+import { CreatePostContainer } from './styles'
 
 interface PropsType {
     posts: any[],
@@ -21,12 +25,22 @@ const HomeUI: React.FC<PropsType> = ({
     toggleCreatePopUp,
     showCreatePopUp
 }) => {
+
+    const {user} = useUser()
+
     return (
         <PageLayout>
-            <Button onClick={toggleCreatePopUp}>Create Post</Button>
-            {posts.map((post: any) => (
-                <PostCardUI key={post._id} post={post} />
-            ))}
+            <CreatePostContainer>
+                <Avatar src={user.profile_pic} width={40} />
+                <div className='create-post-trigger' onClick={toggleCreatePopUp}>
+                    <Text>What's on your mind?</Text>
+                </div>
+            </CreatePostContainer>
+            <div style={{ marginTop: '16px' }}>
+                {posts.map((post: any) => (
+                    <PostCard key={post._id} post={post} />
+                ))}
+            </div>
             <Button onClick={loadMorePosts}>Load More</Button>
 
             {showCreatePopUp && (

@@ -4,10 +4,10 @@ import logger from "../../utils/logger.util";
 
 export const createUserController = async (req: Request, res: Response) => {
     try {
-        const { img, name, email, isAdmin } = req.body;
+        const { profile_pic, name, email, isAdmin } = req.body;
 
         const data = {
-            profile_pic: img,
+            profile_pic: profile_pic,
             name: name,
             email: email,
             isAdmin: isAdmin

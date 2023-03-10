@@ -9,32 +9,36 @@ import { darkTheme, lightTheme } from './theme';
 import Header from './components/Header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserProvider } from './contexts/UserContext';
+import { MobileProvider } from './contexts/MobileContext';
 
 function App() {
 
   const { theme } = useThemeMode()
 
-  console.log(theme)
-
   return (
     <ThemeModeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GoogleOAuthProvider clientId={AUTH_CLIENT_ID}>
-        <div className="App">
-          <Router>
-            <ToastContainer />
-            <Header />
-            <Routes>
-              <Route path='/auth' element={
-                <Auth />
-              }>
-              </Route>
+        <MobileProvider>
+          <UserProvider>
+            <div className="App">
+              <Router>
+                <ToastContainer />
+                <Header />
+                <Routes>
+                  <Route path='/auth' element={
+                    <Auth />
+                  }>
+                  </Route>
 
-              <Route path='/' element={
-                <Home />
-              }></Route>
-            </Routes>
-          </Router>
-        </div>
+                  <Route path='/' element={
+                    <Home />
+                  }></Route>
+                </Routes>
+              </Router>
+            </div>
+          </UserProvider>
+        </MobileProvider>
       </GoogleOAuthProvider>
     </ThemeModeProvider>
   );
