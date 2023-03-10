@@ -1,30 +1,24 @@
 export const lightTheme = {
     body: '#f9f9f9',
     text: '#4F4F4F',
-    subText: '#A7A7A7',
+    subText: '#ababab',
     background: "#fff",
-    headerBackground: '#fff',
-    headerText: "#333333",
-    cardBorder: "#E5E5E5",
-    loadButtonBorder: "#000",
-    loadButtonText: "#000",
-    popUpBG: "#fff",
-    searchBG: '#FAFAFA',
-    searchBorder: "#ECECEC",
-    suggestionsBG: '#fff'
+    shadow: '#d2d2d2',
+    floatingShadow: '#d2d2d2',
+    inputBG: '#efefef',
+    border: '#d9d9d9',
+    buttonBorder: '#4F4F4F',
+    buttonHover: '#242526'
 }
 export const darkTheme = {
-    body: '#232323',
+    body: '#1c1e21',
     text: '#E5E5E5',
-    subText: '#A7A7A7',
-    background: "#141414",
-    cardBorder: "#141414",
-    headerBackground: '#232323',
-    headerText: "#fff",
-    loadButtonBorder: "#fff",
-    loadButtonText: "#fff",
-    popUpBG: "#232323",
-    searchBG: '#323232',
-    searchBorder: "#858484",
-    suggestionsBG: '#323232'
+    subText: '#8d8d8d',
+    background: "#242526",
+    shadow: 'transparent',
+    floatingShadow: '#0e0e0e',
+    inputBG: '#3A3B3C',
+    border: '#424242',
+    buttonBorder: '#E5E5E5',
+    buttonHover: '#424242'
 }

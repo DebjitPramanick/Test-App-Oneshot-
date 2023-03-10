@@ -7,14 +7,18 @@ export const Text = styled.p`
     color: ${props => props.theme.text};
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
 `
 export const SmallText = styled.p`
     font-style: normal;
     font-size: 12px;
     letter-spacing: -0.02em;
-    color: ${props => props.theme.text};
+    color: ${props => props.theme.subText};
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
 `
 
 export const LargeText = styled.p`
@@ -24,6 +28,8 @@ export const LargeText = styled.p`
     color: ${props => props.theme.text};
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
 `
 
 export const Heading = styled.h1`
@@ -33,6 +39,8 @@ export const Heading = styled.h1`
     color: ${props => props.theme.text};
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
 `
 
 export const SubHeading = styled.h3`
@@ -42,4 +50,6 @@ export const SubHeading = styled.h3`
     color: ${props => props.theme.text};
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
 `

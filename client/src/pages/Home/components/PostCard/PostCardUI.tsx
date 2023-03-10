@@ -1,7 +1,8 @@
 import React from 'react'
 import { Avatar, Flex } from '../../../../components/Styled/Shared'
-import { LargeText, Text } from '../../../../components/Styled/Typography'
+import { LargeText, SmallText, Text } from '../../../../components/Styled/Typography'
 import { useUser } from '../../../../contexts/UserContext'
+import { formatDate } from '../../../../helpers/data.helper'
 import { UserType } from '../../../../types/user.type'
 import { Card } from './styles'
 
@@ -17,9 +18,12 @@ const PostCardUI: React.FC<PropsType> = ({
 
     return (
         <Card>
-            <Flex style={{ marginBottom: '26px', gap: '16px' }}>
-                <Avatar src={postUser?.profile_pic || ""} width={30} />
-                <Text>{postUser?.name}</Text>
+            <Flex style={{ marginBottom: '26px', gap: '10px' }}>
+                <Avatar src={postUser?.profile_pic || ""} width={40} />
+                <div>
+                  <Text style={{marginBottom: '4px'}}>{postUser?.name}</Text>  
+                  <SmallText>{formatDate(post.createdAt)}</SmallText>
+                </div>
             </Flex>
             <div>
                 <LargeText style={{ marginBottom: '20px' }}>{post.title}</LargeText>

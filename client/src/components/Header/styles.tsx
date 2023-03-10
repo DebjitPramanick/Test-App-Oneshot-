@@ -6,7 +6,7 @@ export const HeaderContaier = styled.div`
     top: 0;
     right: 0;
     left: 0;
-    background: ${props => props.theme.headerBackground || 'white'};
+    background: ${props => props.theme.background};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,23 +48,17 @@ export const HeaderContent = styled.div`
         @media(max-width: 1042px) {
             display: flex;
         }
-    }
-
-    // @media(max-width: 910px) {
-    //     width: calc(100% - 32px);
-    // }
-
-    
+    }  
 `
 
 export const FloatingContainer = styled.div<{height: string}>`
     position: absolute;
-    background: ${props => props.theme.headerBackground || '#fff'};
+    background: ${props => props.theme.background};
     top: 40px;
     width: 300px;
     right: 0;
     overflow: hidden;
-    box-shadow: 0 0 10px #d2d2d2;
+    box-shadow: 0 0 10px  ${props => props.theme.floatingShadow};
     border-radius: 4px;
 
     &.expand{

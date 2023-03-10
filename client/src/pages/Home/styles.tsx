@@ -7,18 +7,18 @@ export const CreatePostContainer = styled.div`
     gap: 16px;
     border-radius: 6px;
     margin: 10px 0;
-    background: #fff;
-    box-shadow: 0 0 10px #d2d2d2;
+    background: ${props => props.theme.background};
+    box-shadow: 0 0 10px ${props => props.theme.shadow};
 
     .create-post-trigger {
-        background: #f9f9f9;
+        background: ${props => props.theme.inputBG};
         width: 100%;
-        padding: 10px;
+        padding: 10px 16px;
         border-radius: 4px;
         cursor: pointer;
         
         p {
-            color: grey
+            color: ${props => props.theme.subText}
         }
     }
 `

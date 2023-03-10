@@ -6,7 +6,7 @@ export const FormContainer = styled.div`
     border-radius: 6px;
     padding: 20px 40px;
     background: ${(props: any) => props.theme.background};
-    box-shadow: 0 0 10px ${(props: any) => props.theme.boxShadow};
+    box-shadow: 0 0 10px ${(props: any) => props.theme.shadow};
 `
 
 export const Field = styled.div`
@@ -64,13 +64,13 @@ export const Button = styled.button`
     letter-spacing: -0.02em;
     cursor: pointer;
     display: block;
-    background: transparent;
+    background: ${props => props.theme.background};
     border: 1px solid ${props => props.theme.buttonBorder};
     color: ${props => props.theme.text};
     transition: 0.5s;
 
     &:hover {
-        background: black;
+        background: ${props => props.theme.buttonHover};
         color: white
     }
 `

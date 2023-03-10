@@ -20,8 +20,8 @@ export const PopupContainer = styled.div`
     width: 500px;
     max-height: 450px;
     min-height: 200px;
-    background: #fff;
-    border: 1px solid ${props => props.theme.cardBorder};
+    background: ${props => props.theme.background};
+    border: 1px solid ${props => props.theme.border};
 
     @media(max-width: 900px) {
         width: calc(100vw - 52px);
@@ -40,6 +40,13 @@ export const PopupBody = styled.div`
     }
 `
 
+export const PopupHeader = styled.div`
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid ${props => props.theme.border};
+    justify-content: space-between;
+    padding: 16px;
+`
 
 export const ScrollContainer = styled.div`
     overflow-y: scroll;
