@@ -3,3 +3,27 @@
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d8d8d8; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7e7e7e; 
+}
+
+.read-more-overlay{
+  height: calc(100% - 20px);
+}
