@@ -5,10 +5,10 @@ export const lightTheme = {
     background: "#fff",
     shadow: '#d2d2d2',
     floatingShadow: '#d2d2d2',
-    inputBG: '#efefef',
+    inputBG: '#f0f2f5',
     border: '#d9d9d9',
     buttonBorder: '#4F4F4F',
-    buttonHover: '#242526'
+    buttonHover: '#242526',
 }
 export const darkTheme = {
     body: '#1c1e21',

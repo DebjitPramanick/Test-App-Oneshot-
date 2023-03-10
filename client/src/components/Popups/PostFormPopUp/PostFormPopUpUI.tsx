@@ -14,7 +14,7 @@ interface PropsType {
     uploading: boolean
 }
 
-const PostFormPopUpUI: React.FC<PropsType> = ({
+const PostFormPopupUI: React.FC<PropsType> = ({
     closePopup,
     handlePostData,
     post,
@@ -58,4 +58,4 @@ const PostFormPopUpUI: React.FC<PropsType> = ({
     )
 }
 
-export default PostFormPopUpUI
+export default PostFormPopupUI

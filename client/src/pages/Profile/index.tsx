@@ -1,8 +1,10 @@
 import React from 'react'
+import ProfileUI from './ProfileUI'
 
 const Profile = () => {
+
   return (
-    <div>Profile</div>
+    <ProfileUI />
   )
 }
 

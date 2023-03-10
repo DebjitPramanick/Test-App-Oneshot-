@@ -14,6 +14,7 @@ import { MobileProvider } from './contexts/MobileContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './theme/GlobalStyles';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -37,6 +38,10 @@ function App() {
 
                   <Route path='/' element={
                     <ProtectedRoute><Home /></ProtectedRoute>
+                  }></Route>
+
+                  <Route path='/profile' element={
+                    <ProtectedRoute><Profile /></ProtectedRoute>
                   }></Route>
 
                 </Routes>

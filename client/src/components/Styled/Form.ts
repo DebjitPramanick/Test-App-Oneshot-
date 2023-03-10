@@ -24,7 +24,7 @@ export const Field = styled.div`
 
 export const Input = styled.input`  
     padding: 10px 12px;
-    border: 1px solid ${(props: any) => props.theme.border};
+    border: 0;
     color: ${(props: any) => props.theme.text};
     background: ${(props: any) => props.theme.inputBG};
     font-style: normal;
@@ -40,7 +40,7 @@ export const TextArea = styled.textarea`
     padding: 10px 12px;
     height: 100px;
     resize: none;
-    border: 1px solid ${(props: any) => props.theme.border};
+    border: 0;
     color: ${(props: any) => props.theme.text};
     background: ${(props: any) => props.theme.inputBG};
     font-style: normal;

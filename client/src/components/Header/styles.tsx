@@ -22,39 +22,15 @@ export const HeaderContent = styled.div`
     gap: 16px;
     position: relative;
 
-    .header-search-container {
-        @media(max-width: 500px) {
-            display: none;
-        }
+    @media(max-width: 900px) {
+        padding: 0 16px;
     }
-
-    .mobile-icons {
-        display: none;
-        
-        .mobile-menu-icon {
-            display: none;
-            @media(max-width: 1042px) {
-                display: block;
-            }
-        }
-
-        .mobile-search-icon {
-            display: none;
-            @media(max-width: 500px) {
-                display: block;
-            }
-        }
-
-        @media(max-width: 1042px) {
-            display: flex;
-        }
-    }  
 `
 
 export const FloatingContainer = styled.div<{height: string}>`
     position: absolute;
     background: ${props => props.theme.background};
-    top: 40px;
+    top: 46px;
     width: 300px;
     right: 0;
     overflow: hidden;

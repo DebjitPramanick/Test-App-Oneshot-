@@ -1,5 +1,6 @@
 import React from 'react'
-import PostFormPopUp from '../../components/Popups/PostFormPopUp'
+import Loader from '../../components/Loader'
+import PostFormPopUp from '../../components/Popups/PostFormPopup'
 import { Button } from '../../components/Styled/Form'
 import { PageLayout } from '../../components/Styled/Layout'
 import { Avatar } from '../../components/Styled/Shared'
@@ -26,7 +27,7 @@ const HomeUI: React.FC<PropsType> = ({
     showCreatePopUp
 }) => {
 
-    const {user} = useUser()
+    const { user } = useUser()
 
     return (
         <PageLayout>
@@ -36,12 +37,16 @@ const HomeUI: React.FC<PropsType> = ({
                     <Text>What's on your mind?</Text>
                 </div>
             </CreatePostContainer>
-            <div style={{ marginTop: '16px' }}>
-                {posts.map((post: any) => (
-                    <PostCard key={post._id} post={post} />
-                ))}
-            </div>
-            <Button onClick={loadMorePosts}>Load More</Button>
+            {loading ? (<Loader type='page' />) : (
+                <>
+                    <div style={{ marginTop: '16px' }}>
+                        {posts.map((post: any) => (
+                            <PostCard key={post._id} post={post} />
+                        ))}
+                    </div>
+                    <Button onClick={loadMorePosts}>Load More</Button>
+                </>
+            )}
 
             {showCreatePopUp && (
                 <PostFormPopUp

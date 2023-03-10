@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { createPost } from '../../../api/post.api';
 import { useUser } from '../../../contexts/UserContext';
-import PostFormPopUpUI from './PostFormPopUpUI';
+import PostFormPopupUI from './PostFormPopupUI';
 
 interface PropsType {
   closePopup: () => void,
@@ -21,7 +21,7 @@ const initialPost = {
   user: ''
 }
 
-const PostFormPopUp: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
+const PostFormPopup: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
 
   const [uploading, setUploading] = useState(false);
   const [postData, setPostData] = useState<PostData>(initialPost)
@@ -51,7 +51,7 @@ const PostFormPopUp: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
   }
 
   return (
-    <PostFormPopUpUI
+    <PostFormPopupUI
       closePopup={closePopup}
       handlePostData={handlePostData}
       post={postData}
@@ -61,4 +61,4 @@ const PostFormPopUp: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
   )
 }
 
-export default PostFormPopUp
+export default PostFormPopup

@@ -6,10 +6,12 @@ import { toast } from 'react-toastify'
 
 interface PropsType {
   post: any,
+  actions?: boolean
 }
 
 const PostCard: React.FC<PropsType> = ({
-  post
+  post,
+  actions = false
 }) => {
 
   const [postUser, setPostUser] = useState<UserType | null>(null);
@@ -35,7 +37,8 @@ const PostCard: React.FC<PropsType> = ({
   return (
     <PostCardUI
       post={post}
-      postUser={postUser} />
+      postUser={postUser}
+      actions={actions} />
   )
 }
 
