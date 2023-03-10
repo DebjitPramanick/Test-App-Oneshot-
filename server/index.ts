@@ -8,9 +8,7 @@ import express from "express";
 import cors from 'cors';
 
 const app = express()
-app.use(cors({
-    origin: CROSS_ORIGIN,
-}))
+app.use(cors())
 app.use(json())
 
 connectDB()

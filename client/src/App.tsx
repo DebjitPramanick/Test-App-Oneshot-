@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import { ThemeModeProvider, useThemeMode } from './contexts/ThemeModeContext';
 import { darkTheme, lightTheme } from './theme';
 import Header from './components/Header';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
       <GoogleOAuthProvider clientId={AUTH_CLIENT_ID}>
         <div className="App">
           <Router>
+            <ToastContainer />
             <Header />
             <Routes>
               <Route path='/auth' element={
