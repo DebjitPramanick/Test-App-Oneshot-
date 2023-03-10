@@ -52,7 +52,7 @@ const Header = () => {
             />
           </div>
         </ThemeController>
-        <Flex gap={10} className="mobile-icons">
+        <Flex style={{gap: '10px'}} className="mobile-icons">
           <AiOutlineSearch size={20} onClick={() => {
             toggleMobileSearch(!showMobileSearch)
             toggleMobileMenu(false)

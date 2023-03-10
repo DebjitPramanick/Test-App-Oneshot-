@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllPosts } from '../../api/post.api'
-import { PageLayout } from '../../components/Styled/Layout'
 import { toast } from 'react-toastify'
 import HomeUI from './HomeUI'
 
@@ -9,6 +8,7 @@ const Home = () => {
   const [posts, setPosts] = useState([])
   const [pageNum, setPageNum] = useState<number>(1);
   const [loading, setLoading] = useState(false)
+  const [showCreatePopUp, setShowCreatePopUp] = useState(false)
 
   useEffect(() => {
     fetchAllPosts()
@@ -50,6 +50,10 @@ const Home = () => {
     <HomeUI
       posts={posts}
       loadMorePosts={loadMorePosts}
+      refetchPosts={fetchAllPosts}
+      loading={loading}
+      toggleCreatePopUp={() => setShowCreatePopUp(!showCreatePopUp)}
+      showCreatePopUp={showCreatePopUp}
     />
   )
 }

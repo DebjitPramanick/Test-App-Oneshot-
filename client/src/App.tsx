@@ -14,6 +14,8 @@ function App() {
 
   const { theme } = useThemeMode()
 
+  console.log(theme)
+
   return (
     <ThemeModeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GoogleOAuthProvider clientId={AUTH_CLIENT_ID}>

@@ -36,6 +36,22 @@ export const Input = styled.input`
     border-radius: 4px;
 `
 
+export const TextArea = styled.textarea`  
+    padding: 10px 12px;
+    height: 100px;
+    resize: none;
+    border: 1px solid ${(props: any) => props.theme.border};
+    color: ${(props: any) => props.theme.text};
+    background: ${(props: any) => props.theme.inputBG};
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+`
+
 export const Button = styled.button`
     border: 0;
     outline: 0;

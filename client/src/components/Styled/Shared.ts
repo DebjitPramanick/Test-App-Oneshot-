@@ -13,8 +13,7 @@ export const Avatar = styled.div<{src: string, width: number}>`
     background-size: cover;
 `
 
-export const Flex = styled.div<{gap: number}>`
+export const Flex = styled.div`
     display: flex;
     align-items: center;
-    gap: ${(props:any) => props.gap}px
 `

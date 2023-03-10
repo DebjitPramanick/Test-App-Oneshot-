@@ -26,9 +26,9 @@ export const Heading = styled.h1`
     overflow: hidden;
 `
 
-export const SubHeading = styled.h1`
+export const SubHeading = styled.h3`
     font-style: normal;
-    font-size: 18px;
+    font-size: 24px;
     letter-spacing: -0.02em;
     color: ${props => props.theme.text};
     text-overflow: ellipsis;
