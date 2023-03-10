@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {ObjectId} from 'mongodb'
 import logger from "../../utils/logger.util";
-import { createPostHelper, deletePostHelper, getPostHelper } from "./post.helpers";
+import { createPostHelper, deletePostHelper, getPostHelper, getPostsByTitleHelper } from "./post.helpers";
 
 export const createPostController = async (req: Request, res: Response) => {
     try {
@@ -58,18 +58,38 @@ export const getAllPostsController = async (req: Request, res: Response) => {
     try {
         const {page} = req.query;
 
-        const posts: any = await getPostHelper(undefined, Number(page));
+        const data: any = await getPostHelper(undefined, Number(page));
 
         logger.info(`Fetched all posts`)
 
         res.status(200).json({
             message: "Fetched all posts.",
-            posts: posts
+            posts: data.posts,
+            total: data.count
         });
     } catch (error) {
         logger.error(error, "Error getting posts")
         res.status(500).json({
             message: 'Failed to fetch all posts. Try again after sometime.'
+        })
+    }
+}
+
+export const getPostsByTitleController = async (req: Request, res: Response) => {
+    try {
+        const { title }: any = req.query;
+        const posts: any = await getPostsByTitleHelper(title);
+
+        logger.info(`Fetched posts whose titles include: ${title}`)
+
+        res.status(200).json({
+            message: "Posts found.",
+            posts: posts
+        });
+    } catch (error) {
+        logger.error(error, "Error getting user")
+        res.status(500).json({
+            message: 'Failed to fetch user data. Try again after sometime.'
         })
     }
 }

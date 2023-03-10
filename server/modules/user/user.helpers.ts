@@ -29,6 +29,15 @@ export const getUserHelper = async (userId: string) => {
     }
 }
 
+export const getUsersByNameHelper = async (name: string) => {
+    try {
+        const users = await User.find({name: { $regex: `.*${name}.*`, $options: 'i' }});
+        return users;
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
 export const getUserByEmailHelper = async (email: string) => {
     try {
         const user = await User.findOne({email: email});

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { generateToken, createUserHelper, getUserHelper, deleteUserHelper, getUserByEmailHelper, loginUserHelper } from "./user.helpers";
+import { generateToken, createUserHelper, getUserHelper, deleteUserHelper, getUserByEmailHelper, loginUserHelper, getUsersByNameHelper } from "./user.helpers";
 import logger from "../../utils/logger.util";
 import { ObjectId } from "mongodb";
 
@@ -107,6 +107,25 @@ export const getUserByIDController = async (req: Request, res: Response) => {
         res.status(200).json({
             message: "User found.",
             user: user
+        });
+    } catch (error) {
+        logger.error(error, "Error getting user")
+        res.status(500).json({
+            message: 'Failed to fetch user data. Try again after sometime.'
+        })
+    }
+}
+
+export const getUsersByNameController = async (req: Request, res: Response) => {
+    try {
+        const { name }: any = req.query;
+        const users: any = await getUsersByNameHelper(name);
+
+        logger.info(`Fetched users whose names include: ${name}`)
+
+        res.status(200).json({
+            message: "Users found.",
+            users: users
         });
     } catch (error) {
         logger.error(error, "Error getting user")
