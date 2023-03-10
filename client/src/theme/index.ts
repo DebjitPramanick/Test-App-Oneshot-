@@ -9,6 +9,8 @@ export const lightTheme = {
     border: '#d9d9d9',
     buttonBorder: '#4F4F4F',
     buttonHover: '#242526',
+    toggleBG: '#242526',
+    toggleColor: '#E5E5E5'
 }
 export const darkTheme = {
     body: '#1c1e21',
@@ -20,5 +22,7 @@ export const darkTheme = {
     inputBG: '#3A3B3C',
     border: '#424242',
     buttonBorder: '#E5E5E5',
-    buttonHover: '#424242'
+    buttonHover: '#424242',
+    toggleBG: '#fff',
+    toggleColor: '#4F4F4F'
 }

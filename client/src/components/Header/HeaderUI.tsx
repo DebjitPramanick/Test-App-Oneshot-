@@ -60,7 +60,7 @@ const HeaderUI: React.FC<PropsType> = ({
                         </Flex>
                         <Flex style={{ justifyContent: 'space-between' }}>
                             <Text>Log Out</Text>
-                            <Button onClick={handleLogout} style={{ width: '35px', height: '35px' }}><AiOutlineLogout size={16} /></Button>
+                            <Button onClick={handleLogout} style={{ width: '39px', height: '35px' }}><AiOutlineLogout size={16} /></Button>
                         </Flex>
                     </div>
                 </FloatingContainer>

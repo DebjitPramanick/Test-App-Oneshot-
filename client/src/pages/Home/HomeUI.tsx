@@ -6,7 +6,7 @@ import { PageLayout } from '../../components/Styled/Layout'
 import { Avatar } from '../../components/Styled/Shared'
 import { Text } from '../../components/Styled/Typography'
 import { useUser } from '../../contexts/UserContext'
-import PostCard from './components/PostCard'
+import PostCard from '../../components/PostCard'
 import { CreatePostContainer } from './styles'
 
 interface PropsType {
@@ -44,7 +44,7 @@ const HomeUI: React.FC<PropsType> = ({
                             <PostCard key={post._id} post={post} />
                         ))}
                     </div>
-                    <Button onClick={loadMorePosts}>Load More</Button>
+                    <Button onClick={loadMorePosts} style={{margin: 'auto'}}>Load More</Button>
                 </>
             )}
 

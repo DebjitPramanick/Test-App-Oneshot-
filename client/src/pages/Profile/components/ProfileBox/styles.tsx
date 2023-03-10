@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    border-radius: 10px;
+    border-radius: 6px;
     background: ${props => props.theme.background};
     box-shadow: 0 0 10px ${props => props.theme.shadow};
     display: flex;
@@ -11,5 +11,5 @@ export const Container = styled.div`
     gap: 16px;
     width: 200px;
     padding: 16px;
-    position: absolute;
+    position: fixed;
 `

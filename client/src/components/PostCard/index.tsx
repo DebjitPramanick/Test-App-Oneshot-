@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { getUser } from '../../../../api/user.api';
-import { UserType } from '../../../../types/user.type';
+import { getUser } from '../../api/user.api';
+import { UserType } from '../../types/user.type';
 import PostCardUI from './PostCardUI'
 import { toast } from 'react-toastify'
 
@@ -15,6 +15,8 @@ const PostCard: React.FC<PropsType> = ({
 }) => {
 
   const [postUser, setPostUser] = useState<UserType | null>(null);
+  const [showEditPopup, setShowEditPopup] = useState<string | null>(null)
+  const [showDeletPopup, setShowDeletePopup] = useState<string | null>(null)
 
   useEffect(() => {
     fetchUserData();
@@ -34,11 +36,23 @@ const PostCard: React.FC<PropsType> = ({
     }
   }
 
+  const toggleEditPopup = (postId: string | null) => {
+    setShowEditPopup(postId)
+  }
+
+  const toggleDeletePopup = (postId: string | null) => {
+    setShowDeletePopup(postId)
+  }
+
   return (
     <PostCardUI
       post={post}
       postUser={postUser}
-      actions={actions} />
+      actions={actions}
+      shouldEdit={showEditPopup}
+      shouldDelete={showDeletPopup}
+      toggleEditPopup={toggleEditPopup}
+      toggleDeletePopup={toggleDeletePopup}/>
   )
 }
 

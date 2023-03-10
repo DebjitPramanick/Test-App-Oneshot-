@@ -9,6 +9,12 @@ export const Text = styled.p`
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+
+    &.no-truncate{
+        text-overflow: unset;
+        overflow: visible;
+        white-space: unset;
+    }
 `
 export const SmallText = styled.p`
     font-style: normal;
@@ -19,6 +25,12 @@ export const SmallText = styled.p`
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+
+    &.no-truncate{
+        text-overflow: unset;
+        overflow: visible;
+        white-space: unset;
+    }
 `
 
 export const LargeText = styled.p`
@@ -30,6 +42,12 @@ export const LargeText = styled.p`
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+
+    &.no-truncate{
+        text-overflow: unset;
+        overflow: visible;
+        white-space: unset;
+    }
 `
 
 export const Heading = styled.h1`
@@ -41,6 +59,12 @@ export const Heading = styled.h1`
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+
+    &.no-truncate{
+        text-overflow: unset;
+        overflow: visible;
+        white-space: unset;
+    }
 `
 
 export const SubHeading = styled.h3`
@@ -52,4 +76,10 @@ export const SubHeading = styled.h3`
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+
+    &.no-truncate{
+        text-overflow: unset;
+        overflow: visible;
+        white-space: unset;
+    }
 `

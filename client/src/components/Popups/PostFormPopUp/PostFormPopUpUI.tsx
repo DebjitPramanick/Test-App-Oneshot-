@@ -1,6 +1,6 @@
 import React from 'react'
 import { Avatar, Flex } from '../../Styled/Shared';
-import { Overlay, PopupContainer, PopupBody, PopupHeader } from './styles';
+import { Overlay, PopupContainer, PopupBody, PopupHeader } from '../../Styled/Popup';
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Button, Input, TextArea } from '../../Styled/Form';
 import { SubHeading, Text } from '../../Styled/Typography';
@@ -22,7 +22,7 @@ const PostFormPopupUI: React.FC<PropsType> = ({
     uploading,
 }) => {
 
-    const {user} = useUser()
+    const { user } = useUser()
 
     return (
         <Overlay>
@@ -34,7 +34,7 @@ const PostFormPopupUI: React.FC<PropsType> = ({
                     </PopupHeader>
 
                     <div style={{ padding: '16px' }}>
-                        <Flex style={{gap: '16px', marginBottom: "20px"}}>
+                        <Flex style={{ gap: '16px', marginBottom: "20px" }}>
                             <Avatar src={user.profile_pic} width={30} />
                             <Text>{user.name}</Text>
                         </Flex>
@@ -54,7 +54,7 @@ const PostFormPopupUI: React.FC<PropsType> = ({
                     </div>
                 </PopupBody>
             </PopupContainer>
-        </Overlay >
+        </Overlay>
     )
 }
 
