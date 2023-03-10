@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { generateToken, createUserHelper, getUserHelper, deleteUserHelper } from "./user.helpers";
+import { generateToken, createUserHelper, getUserHelper, deleteUserHelper, getUserByEmailHelper, loginUserHelper } from "./user.helpers";
 import logger from "../../utils/logger.util";
+import { ObjectId } from "mongodb";
 
 export const createUserController = async (req: Request, res: Response) => {
     try {
@@ -31,6 +32,61 @@ export const createUserController = async (req: Request, res: Response) => {
         logger.error(error, "Error creating user")
         res.status(500).json({
             message: 'Failed to register. Try again after sometime.'
+        })
+    }
+}
+
+export const checkUserByEmailController = async (req: Request, res: Response) => {
+    try {
+        const { email } = req.body;
+        const user: any = await getUserByEmailHelper(email);
+
+        if (!user) {
+            res.status(200).json({
+                message: "User does not exist.",
+                exists: 0,
+                userId: null
+            });
+            return;
+        }
+
+        logger.info(`Found user successfully with email: ${email}`)
+
+        res.status(200).json({
+            message: "User exists with this email. Try another email.",
+            exists: 1,
+            userId: user._id
+        });
+    } catch (error) {
+        logger.error(error, "Error finding user with email")
+        res.status(500).json({
+            message: 'Failed to check if user exists. Try again after sometime.'
+        })
+    }
+}
+
+export const loginUserController = async (req: Request, res: Response) => {
+    try {
+        const { userId } = req.body;
+        const user: any = await loginUserHelper(userId);
+
+        const accessToken = await generateToken({
+            userId: user._id,
+            email: user.email,
+            isAdmin: false
+        });
+
+        logger.info(`Found user successfully with ID: ${user._id}`)
+
+        res.status(200).json({
+            message: "User found.",
+            token: accessToken,
+            user: user
+        });
+    } catch (error) {
+        logger.error(error, "Error getting user")
+        res.status(500).json({
+            message: 'Failed to fetch user data. Try again after sometime.'
         })
     }
 }

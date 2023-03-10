@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserProvider } from './contexts/UserContext';
 import { MobileProvider } from './contexts/MobileContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
@@ -32,8 +33,9 @@ function App() {
                   </Route>
 
                   <Route path='/' element={
-                    <Home />
+                    <ProtectedRoute><Home /></ProtectedRoute>
                   }></Route>
+
                 </Routes>
               </Router>
             </div>

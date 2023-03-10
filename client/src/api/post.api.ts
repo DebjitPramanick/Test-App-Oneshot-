@@ -7,7 +7,8 @@ export const createPost = async (data: any) => {
         result = result.data;
         return result;
     } catch (error: any) {
-        throw new Error(error)
+        const message = error.response.data.message;
+        throw new Error(message)
     }
 }
 
@@ -17,6 +18,7 @@ export const getAllPosts = async (page: number = 1, limit: number = 10) => {
         result = result.data;
         return result;
     } catch (error: any) {
-        throw new Error(error)
+        const message = error.response.data.message;
+        throw new Error(message)
     }
 }
