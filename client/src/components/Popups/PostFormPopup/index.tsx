@@ -64,7 +64,7 @@ const PostFormPopup: React.FC<PropsType> = ({
   }
 
   const editPostData = async () => {
-    if(postData.title === '' || postData.content === '') {
+    if(!postData.title.trim().length || !postData.content.trim().length) {
       toast.warning("Please fill the details", {
         autoClose: 3500,
         pauseOnHover: true

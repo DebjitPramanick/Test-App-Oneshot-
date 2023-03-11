@@ -35,13 +35,15 @@ const PostCard: React.FC<PropsType> = ({
       id: 1,
       title: 'Edit',
       icon: <AiOutlineEdit size={20} />,
-      action: () => toggleEditPopup(post._id)
+      action: () => toggleEditPopup(post._id),
+      disabled: post.user !== user._id
     },
     {
       id: 2,
       title: 'Delete',
       icon: <AiOutlineDelete size={20} />,
-      action: () => toggleDeletePopup(post._id)
+      action: () => toggleDeletePopup(post._id),
+      disabled: false
     }
   ]
 

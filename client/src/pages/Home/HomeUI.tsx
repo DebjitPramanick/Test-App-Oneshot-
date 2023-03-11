@@ -43,7 +43,11 @@ const HomeUI: React.FC<PropsType> = ({
                 <>
                     <div style={{ marginTop: '16px' }}>
                         {posts.map((post: any) => (
-                            <PostCard key={post._id} post={post} />
+                            <PostCard
+                                key={post._id}
+                                post={post}
+                                actions={user.isAdmin}
+                                refetchPosts={refetchPosts} />
                         ))}
                     </div>
                     {posts.length === 0 ? <Text style={{ textAlign: 'center' }}>No Results found</Text> : (

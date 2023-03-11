@@ -12,10 +12,35 @@ export const Avatar = styled.div<{src: string, width: number, border?: number}>`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    cursor: pointer
+    cursor: pointer;
+    position: relative;
 `
-
 export const Flex = styled.div`
     display: flex;
     align-items: center;
+`
+
+export const AdminTag = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ab24ff;
+    width: fit-content;
+    padding: 6px 10px;
+    border-radius: 50px;
+    font-size: 14px;
+    color: #fff;
+`
+
+export const AvatarAdminBadge = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ab24ff;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

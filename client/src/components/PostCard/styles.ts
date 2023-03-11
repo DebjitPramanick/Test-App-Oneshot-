@@ -7,6 +7,5 @@ export const Card= styled.div`
     box-shadow: 0 0 10px ${props => props.theme.shadow};
     margin-bottom: 16px;
     max-height: 300px;
-    overflow: hidden;
     position: relative;
 `

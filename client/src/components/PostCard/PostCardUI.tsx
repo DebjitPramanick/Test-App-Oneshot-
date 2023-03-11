@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Avatar, Flex } from '../../components/Styled/Shared'
 import { LargeText, SmallText, Text } from '../../components/Styled/Typography'
 import { formatDate } from '../../helpers/data.helper'
@@ -8,6 +8,7 @@ import { FiMoreVertical } from 'react-icons/fi'
 import ConfirmPopup from '../Popups/ConfirmPopup'
 import MenuPopup from '../Popups/MenuPopup'
 import PostFormPopup from '../Popups/PostFormPopup'
+import ReadMore from '../ReadMore'
 
 interface PropsType {
     post: any,
@@ -17,7 +18,7 @@ interface PropsType {
     shouldEdit: string | null,
     toggleDeletePopup: (postId?: string) => void,
     shouldDelete: string | null,
-    toggleMenuPopup: (postId: string) => void,
+    toggleMenuPopup: (postId?: string) => void,
     showMenu: string | null,
     menuItems: any[],
     handleDeletePost: () => void,
@@ -39,6 +40,8 @@ const PostCardUI: React.FC<PropsType> = ({
     refetchPosts
 }) => {
 
+    const triggerRef = useRef(null)
+
     return (
         <Card>
             <Flex style={{ justifyContent: 'space-between', marginBottom: '26px' }}>
@@ -49,14 +52,16 @@ const PostCardUI: React.FC<PropsType> = ({
                         <SmallText>{formatDate(post.createdAt)}</SmallText>
                     </div>
                 </Flex>
-                {actions && <FiMoreVertical
-                    onClick={() => toggleMenuPopup(!showMenu ? post._id : null)}
-                    size={20}
-                    cursor="pointer" />}
+                {actions &&
+                    <div ref={triggerRef}><FiMoreVertical
+                        onClick={() => toggleMenuPopup(!showMenu ? post._id : null)}
+                        size={20}
+                        cursor="pointer"
+                    /></div>}
             </Flex>
             <div>
                 <LargeText style={{ marginBottom: '20px' }}>{post.title}</LargeText>
-                <Text>{post.content}</Text>
+                <ReadMore>{post.content}</ReadMore>
             </div>
 
             {shouldDelete === post._id && (
@@ -78,7 +83,9 @@ const PostCardUI: React.FC<PropsType> = ({
 
             {showMenu === post._id && (
                 <MenuPopup
-                    menuItems={menuItems} />
+                    menuItems={menuItems}
+                    closeMenu={toggleMenuPopup}
+                    trigger={triggerRef.current} />
             )}
         </Card>
     )

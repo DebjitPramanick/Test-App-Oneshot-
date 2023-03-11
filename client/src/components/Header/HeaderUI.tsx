@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { AiOutlineLogout } from 'react-icons/ai'
 import ReactSwitch from 'react-switch'
 import { useMenu } from '../../contexts/MenuContext'
@@ -27,6 +27,23 @@ const HeaderUI: React.FC<PropsType> = ({
     const { showMenu, toggleMenu } = useMenu()
     const { user } = useUser()
 
+    const menuRef = useRef(null);
+    const triggerRef = useRef(null);
+
+    useEffect(() => {
+        const handleClose = (e: any) => {
+            const menu: any = menuRef.current;
+            const trigger: any = triggerRef.current;
+
+            if(trigger.contains(e.target)) return;
+            
+            if (menu && !menu.contains(e.target)) {
+                toggleMenu(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClose)
+    }, [])
+
     return (
         <HeaderContaier>
             <HeaderContent>
@@ -34,10 +51,12 @@ const HeaderUI: React.FC<PropsType> = ({
                 <div className='header-search-container' style={{ width: '100%' }}>
                     <SearchBox />
                 </div>
-                <Avatar src={user.profile_pic} width={36} border={2} onClick={() => toggleMenu(!showMenu)} />
+                <Avatar src={user.profile_pic} width={36} border={2} onClick={() => toggleMenu(!showMenu)}
+                    ref={triggerRef} />
 
                 <MenuPopupContainer height={"fit-content"}
-                    className={`${showMenu ? 'expand' : 'collapse'}`}>
+                    className={`${showMenu ? 'expand' : 'collapse'}`}
+                    ref={menuRef}>
                     <MenuPopupBody>
                         <MenuPopupItem onClick={() => goTo("/")}>
                             <Text>Home</Text>

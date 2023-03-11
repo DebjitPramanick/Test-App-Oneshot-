@@ -10,7 +10,8 @@ export const lightTheme = {
     buttonBorder: '#4F4F4F',
     buttonHover: '#242526',
     toggleBG: '#242526',
-    toggleColor: '#E5E5E5'
+    toggleColor: '#E5E5E5',
+    readMore: '#057ec7'
 }
 export const darkTheme = {
     body: '#1c1e21',
@@ -24,5 +25,6 @@ export const darkTheme = {
     buttonBorder: '#E5E5E5',
     buttonHover: '#424242',
     toggleBG: '#fff',
-    toggleColor: '#4F4F4F'
+    toggleColor: '#4F4F4F',
+    readMore: '#9ac9e5'
 }

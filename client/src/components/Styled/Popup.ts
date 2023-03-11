@@ -56,6 +56,7 @@ export const MenuPopupContainer = styled.div<{height: string, width?: string, to
     overflow: hidden;
     box-shadow: 0 0 10px ${props => props.theme.floatingShadow};
     border-radius: 4px;
+    z-index: 99;
 
     &.expand{
         height: ${(props: any) => props.height};
@@ -83,7 +84,11 @@ export const MenuPopupItem = styled.div`
     cursor: pointer;
 
     &:hover {
-        background: ${props => props.theme.floatingShadow};
+        background: ${props => props.theme.inputBG};
         border-radius: 4px;
+    }
+
+    &.disabled{
+        color: ${props => props.theme.subText}
     }
 `

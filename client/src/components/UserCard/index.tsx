@@ -3,19 +3,16 @@ import { UserType } from '../../types/user.type';
 import UserCardUI from './UserCardUI'
 
 interface PropsType {
-  user: UserType,
-  actions?: boolean
+  user: UserType
 }
 
 const UserCard: React.FC<PropsType> = ({
-  user,
-  actions = false
+  user
 }) => {
 
   return (
     <UserCardUI
-      user={user}
-      actions={actions}/>
+      user={user}/>
   )
 }
 
