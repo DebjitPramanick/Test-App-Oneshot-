@@ -53,8 +53,8 @@ const PostCard: React.FC<PropsType> = ({
       const response: any = await getUser(post.user);
       const userData = response.user;
       setPostUser(userData)
-    } catch (error) {
-      toast.error("Error occurred!", {
+    } catch (error: any) {
+      toast.error(error.message, {
         autoClose: 3500,
         pauseOnHover: true
       })

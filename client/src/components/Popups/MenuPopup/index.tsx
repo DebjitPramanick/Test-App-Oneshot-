@@ -24,8 +24,6 @@ const MenuPopup: React.FC<PropsType> = ({
 
     const menuRef = useRef(null)
 
-    console.log(trigger)
-
     useEffect(() => {
         const handleClose = (e: any) => {
             const menu: any = menuRef.current;

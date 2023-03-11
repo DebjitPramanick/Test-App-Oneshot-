@@ -88,16 +88,14 @@ const Search = () => {
                 setPageNum({...pageNum, users: pageNum.users+1})
             }
             setFetching(false)
-        } catch (error) {
-            toast.error("Error occurred!", {
+        } catch (error: any) {
+            toast.error(error.message, {
                 autoClose: 3500,
                 pauseOnHover: true
             })
             setFetching(false)
         }
     }
-
-    console.log(allFetched, pageNum)
 
     return (
         <SearchUI

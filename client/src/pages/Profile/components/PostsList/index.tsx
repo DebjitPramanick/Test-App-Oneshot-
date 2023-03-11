@@ -27,12 +27,11 @@ const PostsList = () => {
       if(data.total >= data.posts.length) setAllFetched(true)
       setPageNum(pageNum + 1)
       setLoading(false)
-    } catch (error) {
-      toast.error("Error occurred!", {
+    } catch (error: any) {
+      toast.error(error.message, {
         autoClose: 3500,
         pauseOnHover: true
       })
-      console.log(error)
       setLoading(false)
     }
   }
@@ -44,8 +43,8 @@ const PostsList = () => {
       if(data.total >= newPosts.length) setAllFetched(true)
       setPosts(newPosts)
       setPageNum(pageNum + 1)
-    } catch (error) {
-      toast.error("Error occurred!", {
+    } catch (error: any) {
+      toast.error(error.message, {
         autoClose: 3500,
         pauseOnHover: true
       })

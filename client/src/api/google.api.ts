@@ -12,7 +12,6 @@ export const fetchGoogleUser = async (token: string) => {
         });
         return res.data;
     } catch (error: any) {
-        console.log(error)
         throw new Error(error);
     }
 }
