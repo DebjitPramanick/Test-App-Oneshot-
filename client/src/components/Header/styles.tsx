@@ -26,3 +26,10 @@ export const HeaderContent = styled.div`
         padding: 0 16px;
     }
 `
+
+export const HeaderSearchContainer = styled.div`
+    width: 100%;
+    @media(max-width: 600px){
+        display: none;
+    }
+`

@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react'
 import { AiOutlineLogout } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 import ReactSwitch from 'react-switch'
 import { useMenu } from '../../contexts/MenuContext'
 import { useThemeMode } from '../../contexts/ThemeModeContext'
 import { useUser } from '../../contexts/UserContext'
 import SearchBox from '../SearchBox'
-import { Button } from '../Styled/Form'
 import { MenuPopupBody, MenuPopupContainer, MenuPopupItem } from '../Styled/Popup'
-import { Avatar, Flex } from '../Styled/Shared'
+import { Avatar } from '../Styled/Shared'
 import { Heading, Text } from '../Styled/Typography'
-import { HeaderContaier, HeaderContent } from './styles'
+import { HeaderContaier, HeaderContent, HeaderSearchContainer } from './styles'
 
 interface PropsType {
     changeTheme: () => void,
@@ -27,6 +27,8 @@ const HeaderUI: React.FC<PropsType> = ({
     const { showMenu, toggleMenu } = useMenu()
     const { user } = useUser()
 
+    const navigate = useNavigate()
+
     const menuRef = useRef(null);
     const triggerRef = useRef(null);
 
@@ -35,8 +37,8 @@ const HeaderUI: React.FC<PropsType> = ({
             const menu: any = menuRef.current;
             const trigger: any = triggerRef.current;
 
-            if(trigger.contains(e.target)) return;
-            
+            if (trigger.contains(e.target)) return;
+
             if (menu && !menu.contains(e.target)) {
                 toggleMenu(false)
             }
@@ -47,17 +49,23 @@ const HeaderUI: React.FC<PropsType> = ({
     return (
         <HeaderContaier>
             <HeaderContent>
-                <Heading>Test App</Heading>
-                <div className='header-search-container' style={{ width: '100%' }}>
+                <Heading onClick={() => navigate("/")}>Test App</Heading>
+                <HeaderSearchContainer>
                     <SearchBox />
-                </div>
+                </HeaderSearchContainer>
+
                 <Avatar src={user.profile_pic} width={36} border={2} onClick={() => toggleMenu(!showMenu)}
                     ref={triggerRef} />
 
                 <MenuPopupContainer height={"fit-content"}
+
                     className={`${showMenu ? 'expand' : 'collapse'}`}
                     ref={menuRef}>
                     <MenuPopupBody>
+                        <MenuPopupItem className='mobile-only'>
+                            <SearchBox />
+                        </MenuPopupItem>
+
                         <MenuPopupItem onClick={() => goTo("/")}>
                             <Text>Home</Text>
                         </MenuPopupItem>

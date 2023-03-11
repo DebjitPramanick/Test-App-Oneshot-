@@ -12,4 +12,9 @@ export const Container = styled.div`
     width: 200px;
     padding: 16px;
     position: fixed;
+
+    @media(max-width: 700px) {
+        position: relative;
+        width: 100%;
+    }
 `

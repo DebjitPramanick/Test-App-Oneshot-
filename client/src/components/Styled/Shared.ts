@@ -28,7 +28,7 @@ export const AdminTag = styled.div`
     width: fit-content;
     padding: 6px 10px;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 12px;
     color: #fff;
 `
 
@@ -44,3 +44,4 @@ export const AvatarAdminBadge = styled.div`
     align-items: center;
     justify-content: center;
 `
+

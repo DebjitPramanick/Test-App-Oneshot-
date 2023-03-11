@@ -6,6 +6,5 @@ export const Card= styled.div`
     background: ${props => props.theme.background};
     box-shadow: 0 0 10px ${props => props.theme.shadow};
     margin-bottom: 16px;
-    max-height: 300px;
     position: relative;
 `

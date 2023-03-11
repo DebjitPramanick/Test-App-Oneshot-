@@ -16,7 +16,7 @@ const ProfileBoxUI = () => {
         <SmallText>{user.email}</SmallText>
         {user.isAdmin && (
           <AdminTag style={{ marginTop: '20px' }}>
-            <MdOutlineAdminPanelSettings size={16} />
+            <MdOutlineAdminPanelSettings size={14} />
             Admin
           </AdminTag>
         )}

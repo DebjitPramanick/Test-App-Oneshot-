@@ -7,8 +7,5 @@ export const SearchContainer = styled.div`
     gap: 10px;
     padding: 0 10px;
     border-radius: 6px;
-
-    @media(max-width: 600px){
-        display: none;
-    }
+    width: 100%;
 `

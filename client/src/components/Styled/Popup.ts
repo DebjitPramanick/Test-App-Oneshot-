@@ -23,8 +23,7 @@ export const PopupContainer = styled.div`
     border: 1px solid ${props => props.theme.border};
 
     @media(max-width: 900px) {
-        width: calc(100vw - 52px);
-        height: 80vh;
+        width: calc(100vw - 32px);
         border-radius: 10px;
     }
 `
@@ -61,15 +60,22 @@ export const MenuPopupContainer = styled.div<{height: string, width?: string, to
     &.expand{
         height: ${(props: any) => props.height};
         transition: 0.5s;
+
+        @media(max-width: 600px){
+            height: 100vh !important;
+            box-shadow: none;
+            width: 100%;
+        }
     }
 
     &.collapse{
         height: 0;
         transition: 0.5s;
-    }
 
-    .floating-container-content {
-        padding: 10px 16px;
+        @media(max-width: 600px){
+            box-shadow: none;
+            width: 100%;
+        }
     }
 `
 
@@ -86,9 +92,20 @@ export const MenuPopupItem = styled.div`
     &:hover {
         background: ${props => props.theme.inputBG};
         border-radius: 4px;
+
+        @media(max-width: 600px){
+            background: transparent;
+        }
     }
 
     &.disabled{
         color: ${props => props.theme.subText}
+    }
+
+    &.mobile-only{
+        display: none;
+        @media(max-width: 600px){
+            display: flex;
+        }
     }
 `
