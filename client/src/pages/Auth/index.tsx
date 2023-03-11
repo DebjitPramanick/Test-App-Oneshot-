@@ -5,10 +5,11 @@ import { toast } from 'react-toastify'
 import AuthUI from './AuthUI';
 import { fetchGoogleUser } from '../../api/google.api';
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const Auth = () => {
 
-    const { saveUser } = useUser()
+    const { saveUser, isLoggedIn } = useUser()
     const [loading, setLoading] = useState(false)
 
     const handleLoginUser = async (userId: string) => {
@@ -68,6 +69,8 @@ const Auth = () => {
     const googleAuthHanlder = useGoogleLogin({
         onSuccess: onSuccessHandler,
     });
+
+    if(isLoggedIn) return <Navigate to={"/"} />
 
     return (
         <AuthUI
