@@ -22,7 +22,7 @@ const AuthUI: React.FC<PropsType> = ({
             </div>
             <div className='auth-form-section'>
                 <Heading>TestApp</Heading>
-                <Flex style={{ height: "calc(100vh - 68px)", justifyContent: 'center' }}>
+                <Flex style={{ height: "calc(100vh - 70px)", justifyContent: 'center' }}>
                     <BoxContainer>
                         <Text className='no-truncate' style={{marginBottom: '32px'}}>Please register / login with google to coninue.</Text>
                         <GoogleButton onClick={authHandler}>

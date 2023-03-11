@@ -59,8 +59,7 @@ const HeaderUI: React.FC<PropsType> = ({
                     ref={triggerRef} />
 
                 <MenuPopupContainer height={"fit-content"}
-
-                    className={`${showMenu ? 'expand' : 'collapse'}`}
+                    className={`header-menu  ${showMenu ? 'expand' : 'collapse'}`}
                     ref={menuRef}>
                     <MenuPopupBody>
                         <MenuPopupItem className='mobile-only'>

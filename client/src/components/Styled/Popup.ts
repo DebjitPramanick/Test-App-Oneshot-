@@ -57,25 +57,37 @@ export const MenuPopupContainer = styled.div<{height: string, width?: string, to
     border-radius: 4px;
     z-index: 99;
 
+    &.header-menu {
+        &.expand{
+            height: ${(props: any) => props.height};
+            transition: 0.5s;
+    
+            @media(max-width: 600px){
+                height: 100vh !important;
+                box-shadow: none;
+                width: 100%;
+            }
+        }
+    
+        &.collapse{
+            height: 0;
+            transition: 0.5s;
+    
+            @media(max-width: 600px){
+                box-shadow: none;
+                width: 100%;
+            }
+        }
+    }
+
     &.expand{
         height: ${(props: any) => props.height};
         transition: 0.5s;
-
-        @media(max-width: 600px){
-            height: 100vh !important;
-            box-shadow: none;
-            width: 100%;
-        }
     }
 
     &.collapse{
         height: 0;
         transition: 0.5s;
-
-        @media(max-width: 600px){
-            box-shadow: none;
-            width: 100%;
-        }
     }
 `
 
