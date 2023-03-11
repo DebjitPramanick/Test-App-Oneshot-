@@ -70,4 +70,4 @@ const PostFormPopupUI: React.FC<PropsType> = ({
     )
 }
 
-export default PostFormPopupUI
+export default PostFormPopupUI;
