@@ -6,7 +6,9 @@ import PostFormPopupUI from './PostFormPopupUI';
 
 interface PropsType {
   closePopup: () => void,
-  refetchPosts: () => void
+  refetchPosts: () => void,
+  heading?: string,
+  post?: any
 }
 
 interface PostData {
@@ -21,10 +23,15 @@ const initialPost = {
   user: ''
 }
 
-const PostFormPopup: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
+const PostFormPopup: React.FC<PropsType> = ({ 
+  closePopup, 
+  refetchPosts,
+  post,
+  heading
+}) => {
 
   const [uploading, setUploading] = useState(false);
-  const [postData, setPostData] = useState<PostData>(initialPost)
+  const [postData, setPostData] = useState<PostData>(post || initialPost)
   const { user } = useUser()
 
   const uploadPostData = async () => {
@@ -57,6 +64,7 @@ const PostFormPopup: React.FC<PropsType> = ({ closePopup, refetchPosts }) => {
       post={postData}
       uploadPostData={uploadPostData}
       uploading={uploading}
+      heading={heading}
     />
   )
 }

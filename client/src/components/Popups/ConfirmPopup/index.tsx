@@ -10,7 +10,7 @@ interface PropsType {
     message: string,
     closePopup: () => void;
     onCancel?: () => void;
-    onCofirm: () => void
+    onConfirm: () => void
 }
 
 const ConfirmPopup: React.FC<PropsType> = ({
@@ -18,7 +18,7 @@ const ConfirmPopup: React.FC<PropsType> = ({
     message,
     closePopup,
     onCancel,
-    onCofirm
+    onConfirm
 }) => {
     return (
         <Overlay>
@@ -31,8 +31,8 @@ const ConfirmPopup: React.FC<PropsType> = ({
                     <div style={{ padding: '16px' }}>
                         <Text className='no-truncate'>{message}</Text>
                         <Flex style={{marginTop: '20px', gap: '16px'}}>
-                            <Button onClick={onCancel} style={{width: '100%'}}>Cancel</Button>
-                            <Button onClick={onCofirm} style={{width: '100%'}}>Cofirm</Button>
+                            <Button onClick={onCancel} style={{width: '100%', border: 0}}>Cancel</Button>
+                            <Button onClick={onConfirm} style={{width: '100%', border: 0}}>Cofirm</Button>
                         </Flex>
                     </div>
                 </PopupBody>

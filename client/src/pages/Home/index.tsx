@@ -21,7 +21,7 @@ const Home = () => {
     try {
       const data: any= await getAllPosts()
       setPosts(data.posts)
-      if(data.total === data.posts.length) setAllFetched(true)
+      if(data.total >= data.posts.length) setAllFetched(true)
       setPageNum(pageNum + 1)
       setLoading(false)
     } catch (error) {

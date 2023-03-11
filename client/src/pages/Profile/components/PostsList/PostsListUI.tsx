@@ -3,36 +3,37 @@ import { Button } from '../../../../components/Styled/Form'
 import PostCard from '../../../../components/PostCard'
 import { ListContainer } from './styles'
 import Loader from '../../../../components/Loader';
-import AdminActions from '../AdminActions';
 import { useUser } from '../../../../contexts/UserContext';
+import { Text } from '../../../../components/Styled/Typography';
 
 interface PropsType {
     posts: any[],
     refetchPosts: () => void,
     loadMorePosts: () => void,
-    loading: boolean
+    loading: boolean,
+    allFetched: boolean
 }
 
 const PostsListUI: React.FC<PropsType> = ({
     posts,
     loadMorePosts,
     loading,
-    refetchPosts
+    refetchPosts,
+    allFetched
 }) => {
     const { user } = useUser()
     return (
         <ListContainer>
-            {loading ? <Loader type='page' /> : (
-                <>
-                    {user.isAdmin && (<AdminActions />)}
-                    <div style={{ marginTop: '16px' }}>
-                        {posts.map((post: any) => (
-                            <PostCard key={post._id} post={post} actions={true} />
-                        ))}
-                    </div>
-                    <Button onClick={loadMorePosts} style={{margin: 'auto'}}>Load More</Button>
-                </>
-            )}
+            <div style={{ marginTop: '16px' }}>
+                {posts.map((post: any) => (
+                    <PostCard key={post._id} post={post} actions={true} />
+                ))}
+            </div>
+
+            {loading ? <Loader type='page' />
+                : posts.length === 0 ? <Text style={{ textAlign: 'center' }}>No Results found</Text>
+                    : !allFetched ? (<Button style={{ margin: 'auto' }} onClick={loadMorePosts}>Load More</Button>)
+                        : null}
         </ListContainer>
     )
 }

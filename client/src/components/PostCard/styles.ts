@@ -8,4 +8,5 @@ export const Card= styled.div`
     margin-bottom: 16px;
     max-height: 300px;
     overflow: hidden;
+    position: relative;
 `

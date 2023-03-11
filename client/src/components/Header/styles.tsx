@@ -26,28 +26,3 @@ export const HeaderContent = styled.div`
         padding: 0 16px;
     }
 `
-
-export const FloatingContainer = styled.div<{height: string}>`
-    position: absolute;
-    background: ${props => props.theme.background};
-    top: 46px;
-    width: 300px;
-    right: 0;
-    overflow: hidden;
-    box-shadow: 0 0 10px  ${props => props.theme.floatingShadow};
-    border-radius: 4px;
-
-    &.expand{
-        height: ${(props: any) => props.height};
-        transition: 0.5s;
-    }
-
-    &.collapse{
-        height: 0;
-        transition: 0.5s;
-    }
-
-    .floating-container-content {
-        padding: 16px;
-    }
-`

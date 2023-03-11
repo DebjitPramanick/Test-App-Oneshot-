@@ -46,3 +46,45 @@ export const PopupHeader = styled.div`
     justify-content: space-between;
     padding: 16px;
 `
+
+export const MenuPopupContainer = styled.div<{height: string, width?: string, top?: string}>`
+    position: absolute;
+    background: ${props => props.theme.background};
+    top: ${props => props.top || '46px'};
+    width: ${props => props.width || '300px'};
+    right: 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px ${props => props.theme.floatingShadow};
+    border-radius: 4px;
+
+    &.expand{
+        height: ${(props: any) => props.height};
+        transition: 0.5s;
+    }
+
+    &.collapse{
+        height: 0;
+        transition: 0.5s;
+    }
+
+    .floating-container-content {
+        padding: 10px 16px;
+    }
+`
+
+export const MenuPopupBody = styled.div`
+    padding: 10px 10px;
+`
+export const MenuPopupItem = styled.div`
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 8px;
+    cursor: pointer;
+
+    &:hover {
+        background: ${props => props.theme.floatingShadow};
+        border-radius: 4px;
+        color: white;
+    }
+`

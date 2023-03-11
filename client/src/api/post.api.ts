@@ -41,7 +41,18 @@ export const searchPosts = async (title?: string, userId?: string, page: number 
 
 export const deletePost = async (postId?: string) => {
     try {
-        let result = await api.get(`/user/delete/${postId}`)
+        let result = await api.delete(`/post/delete/${postId}`)
+        result = result.data;
+        return result;
+    } catch (error: any) {
+        const message = error.response.data.message;
+        throw new Error(message)
+    }
+}
+
+export const updatePost = async (postId: string, data: any) => {
+    try {
+        let result = await api.delete(`/post/update/${postId}`, data)
         result = result.data;
         return result;
     } catch (error: any) {

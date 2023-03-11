@@ -6,9 +6,10 @@ import { useThemeMode } from '../../contexts/ThemeModeContext'
 import { useUser } from '../../contexts/UserContext'
 import SearchBox from '../SearchBox'
 import { Button } from '../Styled/Form'
+import { MenuPopupBody, MenuPopupContainer, MenuPopupItem } from '../Styled/Popup'
 import { Avatar, Flex } from '../Styled/Shared'
 import { Heading, Text } from '../Styled/Typography'
-import { FloatingContainer, HeaderContaier, HeaderContent } from './styles'
+import { HeaderContaier, HeaderContent } from './styles'
 
 interface PropsType {
     changeTheme: () => void,
@@ -29,26 +30,29 @@ const HeaderUI: React.FC<PropsType> = ({
     return (
         <HeaderContaier>
             <HeaderContent>
-                {/* <img src={theme === 'light' ? Logo : DarkModeLogo} alt="logo" style={{cursor: 'pointer'}} /> */}
                 <Heading>Test App</Heading>
                 <div className='header-search-container' style={{ width: '100%' }}>
-                    {/* <SearchBar type='header' /> */}
                     <SearchBox />
                 </div>
                 <Avatar src={user.profile_pic} width={36} border={2} onClick={() => toggleMenu(!showMenu)} />
 
-                <FloatingContainer height={"fit-content"}
+                <MenuPopupContainer height={"fit-content"}
                     className={`${showMenu ? 'expand' : 'collapse'}`}>
-                    <div className='floating-container-content'>
-                        <Text style={{ marginBottom: '16px', cursor: 'pointer' }} onClick={() => goTo("/")}>Home</Text>
-                        <Text style={{ marginBottom: '16px', cursor: 'pointer' }} onClick={() => goTo("/profile")}>Profile</Text>
-                        <Flex style={{ justifyContent: 'space-between', marginBottom: '16px' }}>
+                    <MenuPopupBody>
+                        <MenuPopupItem onClick={() => goTo("/")}>
+                            <Text>Home</Text>
+                        </MenuPopupItem>
+                        <MenuPopupItem onClick={() => goTo("/profile")}>
+                            <Text>Profile</Text>
+                        </MenuPopupItem>
+
+                        <MenuPopupItem style={{ justifyContent: 'space-between' }}>
                             <Text>Dark Mode</Text>
                             <div>
                                 <ReactSwitch
-                                    width={44}
-                                    height={24}
-                                    handleDiameter={18}
+                                    width={36}
+                                    height={18}
+                                    handleDiameter={14}
                                     checked={theme === 'dark'}
                                     uncheckedIcon={false}
                                     checkedIcon={false}
@@ -59,13 +63,13 @@ const HeaderUI: React.FC<PropsType> = ({
                                     offHandleColor={"#FFFFFF"}
                                 />
                             </div>
-                        </Flex>
-                        <Flex style={{ justifyContent: 'space-between' }}>
+                        </MenuPopupItem>
+                        <MenuPopupItem style={{ justifyContent: 'space-between' }} onClick={handleLogout}>
                             <Text>Log Out</Text>
-                            <Button onClick={handleLogout} style={{ width: '39px', height: '35px' }}><AiOutlineLogout size={16} /></Button>
-                        </Flex>
-                    </div>
-                </FloatingContainer>
+                            <AiOutlineLogout size={20} />
+                        </MenuPopupItem>
+                    </MenuPopupBody>
+                </MenuPopupContainer>
             </HeaderContent>
         </HeaderContaier>
     )

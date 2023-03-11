@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { getAllPosts } from '../../../../api/post.api';
+import { searchPosts } from '../../../../api/post.api';
 import { toast } from 'react-toastify'
 import PostsListUI from './PostsListUI';
+import { useUser } from '../../../../contexts/UserContext';
 
 const PostsList = () => {
 
   const [posts, setPosts] = useState([])
   const [pageNum, setPageNum] = useState<number>(1);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [allFetched, setAllFetched] = useState(false)
+
+  const {user} = useUser();
+  
 
   useEffect(() => {
     fetchAllPosts()
@@ -17,8 +22,9 @@ const PostsList = () => {
   const fetchAllPosts = async () => {
     setLoading(true)
     try {
-      const data: any = await getAllPosts()
+      const data: any = await searchPosts(undefined, user._id)
       setPosts(data.posts)
+      if(data.total >= data.posts.length) setAllFetched(true)
       setPageNum(pageNum + 1)
       setLoading(false)
     } catch (error) {
@@ -33,8 +39,9 @@ const PostsList = () => {
 
   const loadMorePosts = async () => {
     try {
-      const data: any = await getAllPosts(pageNum)
+      const data: any = await searchPosts(undefined, user._id)
       const newPosts = posts.concat(data.posts)
+      if(data.total >= newPosts.length) setAllFetched(true)
       setPosts(newPosts)
       setPageNum(pageNum + 1)
     } catch (error) {
@@ -50,7 +57,8 @@ const PostsList = () => {
       posts={posts}
       loadMorePosts={loadMorePosts}
       refetchPosts={fetchAllPosts}
-      loading={loading} />
+      loading={loading}
+      allFetched={allFetched} />
   )
 }
 

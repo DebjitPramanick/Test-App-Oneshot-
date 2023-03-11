@@ -11,7 +11,8 @@ interface PropsType {
     handlePostData: (val: string, field: 'title' | 'content') => void,
     post: any,
     uploadPostData: () => void
-    uploading: boolean
+    uploading: boolean,
+    heading?: string
 }
 
 const PostFormPopupUI: React.FC<PropsType> = ({
@@ -20,6 +21,7 @@ const PostFormPopupUI: React.FC<PropsType> = ({
     post,
     uploadPostData,
     uploading,
+    heading
 }) => {
 
     const { user } = useUser()
@@ -29,7 +31,7 @@ const PostFormPopupUI: React.FC<PropsType> = ({
             <PopupContainer>
                 <PopupBody>
                     <PopupHeader>
-                        <SubHeading>Create Post</SubHeading>
+                        <SubHeading>{heading || 'Create Post'}</SubHeading>
                         <AiOutlineCloseCircle size={30} cursor="pointer" onClick={closePopup} />
                     </PopupHeader>
 
