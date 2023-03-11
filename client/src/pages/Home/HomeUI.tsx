@@ -61,4 +61,4 @@ const HomeUI: React.FC<PropsType> = ({
     )
 }
 
-export default HomeUI
+export default HomeUI;
