@@ -50,6 +50,14 @@ export const searchPostsHelper = async (field: 'title' | 'userId', queryVal: str
     }
 }
 
+export const updatePostHelper = async (postId: any, data: {title: string, content: string}) => {
+    try {
+        await Post.findByIdAndUpdate(postId, data);
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
 export const deletePostHelper = async (postId: any) => {
     try {
         await Post.findByIdAndDelete(postId);

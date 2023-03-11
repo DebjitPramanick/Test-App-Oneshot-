@@ -39,9 +39,9 @@ export const searchPosts = async (title?: string, userId?: string, page: number 
     }
 }
 
-export const deletePost = async (postId?: string) => {
+export const deletePost = async (postId: string, userId: string) => {
     try {
-        let result = await api.delete(`/post/delete/${postId}`)
+        let result = await api.delete(`/post/delete/${postId}/${userId}`)
         result = result.data;
         return result;
     } catch (error: any) {
@@ -50,9 +50,9 @@ export const deletePost = async (postId?: string) => {
     }
 }
 
-export const updatePost = async (postId: string, data: any) => {
+export const updatePost = async (postId: string, userId: string, data: any) => {
     try {
-        let result = await api.delete(`/post/update/${postId}`, data)
+        let result = await api.put(`/post/update/${postId}/${userId}`, data)
         result = result.data;
         return result;
     } catch (error: any) {

@@ -21,7 +21,7 @@ const Home = () => {
     try {
       const data: any= await getAllPosts()
       setPosts(data.posts)
-      if(data.total >= data.posts.length) setAllFetched(true)
+      if(data.posts.length >= data.total) setAllFetched(true)
       setPageNum(pageNum + 1)
       setLoading(false)
     } catch (error) {
@@ -38,7 +38,7 @@ const Home = () => {
     try {
       const data: any = await getAllPosts(pageNum)
       const newPosts = posts.concat(data.posts)
-      if(data.total >= newPosts.length) setAllFetched(true)
+      if(newPosts.length >= data.total) setAllFetched(true)
       setPosts(newPosts)
       setPageNum(pageNum + 1)
     } catch (error) {

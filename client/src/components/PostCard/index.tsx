@@ -5,16 +5,21 @@ import { UserType } from '../../types/user.type';
 import PostCardUI from './PostCardUI'
 import { toast } from 'react-toastify'
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { useUser } from '../../contexts/UserContext';
 
 interface PropsType {
   post: any,
-  actions?: boolean
+  actions?: boolean,
+  refetchPosts?: () => void,
 }
 
 const PostCard: React.FC<PropsType> = ({
   post,
-  actions = false
+  actions = false,
+  refetchPosts = () => {}
 }) => {
+
+  const {user} = useUser()
 
   const [postUser, setPostUser] = useState<UserType | null>(null);
   const [showEditPopup, setShowEditPopup] = useState<string | null>(null)
@@ -82,13 +87,15 @@ const PostCard: React.FC<PropsType> = ({
 
   const handleDeletePost = async () => {
     try {
-      const res: any = await deletePost(post._id)
+      const res: any = await deletePost(post._id, user._id)
+      await refetchPosts()
       toast.success(res.message, {
         autoClose: 3500,
         pauseOnHover: true
       })
       toggleMenuPopup()
       toggleDeletePopup()
+      
     } catch (error: any) {
       toast.error(error.message, {
         autoClose: 3500,
@@ -109,7 +116,8 @@ const PostCard: React.FC<PropsType> = ({
       toggleMenuPopup={toggleMenuPopup}
       showMenu={showMenuPopup}
       menuItems={menuItems}
-      handleDeletePost={handleDeletePost} />
+      handleDeletePost={handleDeletePost}
+      refetchPosts={refetchPosts} />
   )
 }
 

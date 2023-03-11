@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import {ObjectId} from 'mongodb'
+import { ObjectId } from 'mongodb'
 import logger from "../../utils/logger.util";
-import { createPostHelper, deletePostHelper, getPostHelper, searchPostsHelper } from "./post.helpers";
+import { createPostHelper, deletePostHelper, getPostHelper, searchPostsHelper, updatePostHelper } from "./post.helpers";
 
 export const createPostController = async (req: Request, res: Response) => {
     try {
@@ -56,7 +56,7 @@ export const getPostByIDController = async (req: Request, res: Response) => {
 
 export const getAllPostsController = async (req: Request, res: Response) => {
     try {
-        const {page} = req.query;
+        const { page } = req.query;
 
         const data: any = await getPostHelper(undefined, Number(page));
 
@@ -79,11 +79,11 @@ export const searchPostsByController = async (req: Request, res: Response) => {
     try {
         const { title, userId, page }: any = req.query;
 
-        let data: {posts: any[], count: number} = {posts: [], count: 0};
+        let data: { posts: any[], count: number } = { posts: [], count: 0 };
 
-        if(title) {
+        if (title) {
             data = await searchPostsHelper('title', title, page);
-        } else if(userId) {
+        } else if (userId) {
             data = await searchPostsHelper('userId', userId, page);
         }
 
@@ -102,23 +102,48 @@ export const searchPostsByController = async (req: Request, res: Response) => {
     }
 }
 
-export const deletePostController = async (req: Request, res: Response) => {
+export const updatePostController = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params;
+        const { id, user } = req.params;
+        const { title, content } = req.body;
+        const { isAdmin, userId }: any = (req as any).token
 
-        const {isAdmin, userId}: any = (req as any).token
-
-        if(!isAdmin) {
-            logger.error(`Post was not deleted by unauthorized user with ID: ${userId}`)
-            res.status(404).json({ message: "You are not authorized to delete the post." });
+        if (isAdmin || user === userId) {
+            const data = {title, content}
+            await updatePostHelper(id, data);
+            logger.info(`Updated post successfully with ID: ${id}`)
+            res.status(200).json({ message: "Post updated." });
             return;
         }
 
-        await deletePostHelper(id);
+        logger.error(`Post was not updated by unauthorized user with ID: ${userId}`)
+        res.status(404).json({ message: "You are not authorized to update the post." });
+        return;
 
-        logger.info(`Deleted post data successfully with ID: ${id}`)
+    } catch (error) {
+        logger.error(error, "Error upading post")
+        res.status(500).json({
+            message: 'Failed to update post data. Try again after sometime.'
+        })
+    }
+}
 
-        res.status(200).json({ message: "Post deleted." });
+export const deletePostController = async (req: Request, res: Response) => {
+    try {
+        const { id, user } = req.params;
+
+        const { isAdmin, userId }: any = (req as any).token
+
+        if (isAdmin || user === userId) {
+            await deletePostHelper(id);
+            logger.info(`Deleted post data successfully with ID: ${id}`)
+            res.status(200).json({ message: "Post deleted." });
+            return;
+        }
+
+        logger.error(`Post was not deleted by unauthorized user with ID: ${userId}`)
+        res.status(404).json({ message: "You are not authorized to delete the post." });
+        return;
 
     } catch (error) {
         logger.error(error, "Error deleting post")

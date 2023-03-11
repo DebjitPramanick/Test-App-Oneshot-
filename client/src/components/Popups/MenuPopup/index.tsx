@@ -1,6 +1,5 @@
 import React from 'react'
 import { MenuPopupBody, MenuPopupContainer, MenuPopupItem } from '../../Styled/Popup'
-import { Flex } from '../../Styled/Shared'
 import { Text } from '../../Styled/Typography'
 
 interface PropsType {

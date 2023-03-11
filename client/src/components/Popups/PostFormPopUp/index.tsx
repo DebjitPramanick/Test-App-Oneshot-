@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import { createPost } from '../../../api/post.api';
+import { updatePost, createPost } from '../../../api/post.api';
 import { useUser } from '../../../contexts/UserContext';
 import PostFormPopupUI from './PostFormPopupUI';
 
@@ -23,8 +23,8 @@ const initialPost = {
   user: ''
 }
 
-const PostFormPopup: React.FC<PropsType> = ({ 
-  closePopup, 
+const PostFormPopup: React.FC<PropsType> = ({
+  closePopup,
   refetchPosts,
   post,
   heading
@@ -35,15 +35,55 @@ const PostFormPopup: React.FC<PropsType> = ({
   const { user } = useUser()
 
   const uploadPostData = async () => {
+    if(postData.title === '' || postData.content === '') {
+      toast.warning("Please fill the details", {
+        autoClose: 3500,
+        pauseOnHover: true
+      })
+      return;
+    }
     setUploading(true)
     try {
       const data = { ...postData, user: user._id }
-      await createPost(data);
+      const res: any = await createPost(data);
       await refetchPosts()
       setUploading(false)
       closePopup()
+      toast.success(res.message, {
+        autoClose: 3500,
+        pauseOnHover: true
+      })
     } catch (err: any) {
-      toast.error("Error occurred!", {
+      toast.error(err.message, {
+        autoClose: 3500,
+        pauseOnHover: true
+      })
+      closePopup()
+      setUploading(false)
+    }
+  }
+
+  const editPostData = async () => {
+    if(postData.title === '' || postData.content === '') {
+      toast.warning("Please fill the details", {
+        autoClose: 3500,
+        pauseOnHover: true
+      })
+      return;
+    }
+    setUploading(true)
+    try {
+      const data = { title: postData.title, content: postData.content }
+      const res: any = await updatePost(post._id, user._id, data);
+      await refetchPosts()
+      setUploading(false)
+      closePopup()
+      toast.success(res.message, {
+        autoClose: 3500,
+        pauseOnHover: true
+      })
+    } catch (err: any) {
+      toast.error(err.message, {
         autoClose: 3500,
         pauseOnHover: true
       })
@@ -63,6 +103,7 @@ const PostFormPopup: React.FC<PropsType> = ({
       handlePostData={handlePostData}
       post={postData}
       uploadPostData={uploadPostData}
+      editPostData={editPostData}
       uploading={uploading}
       heading={heading}
     />

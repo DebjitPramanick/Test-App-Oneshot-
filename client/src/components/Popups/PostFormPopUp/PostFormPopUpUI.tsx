@@ -10,7 +10,8 @@ interface PropsType {
     closePopup: () => void,
     handlePostData: (val: string, field: 'title' | 'content') => void,
     post: any,
-    uploadPostData: () => void
+    uploadPostData: () => void,
+    editPostData: () => void
     uploading: boolean,
     heading?: string
 }
@@ -20,18 +21,21 @@ const PostFormPopupUI: React.FC<PropsType> = ({
     handlePostData,
     post,
     uploadPostData,
+    editPostData,
     uploading,
-    heading
+    heading = "Create Post"
 }) => {
 
     const { user } = useUser()
+
+    const isEditting = heading.toLowerCase().includes('edit')
 
     return (
         <Overlay>
             <PopupContainer>
                 <PopupBody>
                     <PopupHeader>
-                        <SubHeading>{heading || 'Create Post'}</SubHeading>
+                        <SubHeading>{heading}</SubHeading>
                         <AiOutlineCloseCircle size={30} cursor="pointer" onClick={closePopup} />
                     </PopupHeader>
 
@@ -50,9 +54,15 @@ const PostFormPopupUI: React.FC<PropsType> = ({
                             value={post.content}
                             onChange={(e: any) => handlePostData(e.target.value, 'content')} />
 
-                        <Button onClick={uploadPostData} style={{ width: '100%', marginTop: '10px' }}>
-                            {!uploading ? 'Post' : 'Posting...'}
-                        </Button>
+                        {isEditting ? (
+                            <Button onClick={editPostData} style={{ width: '100%', marginTop: '10px' }}>
+                                {!uploading ? 'Update' : 'Updating...'}
+                            </Button>
+                        ) : (
+                            <Button onClick={uploadPostData} style={{ width: '100%', marginTop: '10px' }}>
+                                {!uploading ? 'Post' : 'Posting...'}
+                            </Button>
+                        )}
                     </div>
                 </PopupBody>
             </PopupContainer>

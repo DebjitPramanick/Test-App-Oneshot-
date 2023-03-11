@@ -21,17 +21,20 @@ const PostsListUI: React.FC<PropsType> = ({
     refetchPosts,
     allFetched
 }) => {
-    const { user } = useUser()
     return (
         <ListContainer>
             <div style={{ marginTop: '16px' }}>
                 {posts.map((post: any) => (
-                    <PostCard key={post._id} post={post} actions={true} />
+                    <PostCard
+                        key={post._id}
+                        post={post}
+                        actions={true}
+                        refetchPosts={refetchPosts} />
                 ))}
             </div>
 
             {loading ? <Loader type='page' />
-                : posts.length === 0 ? <Text style={{ textAlign: 'center' }}>No Results found</Text>
+                : posts.length === 0 ? <Text style={{ textAlign: 'center' }}>No Posts found</Text>
                     : !allFetched ? (<Button style={{ margin: 'auto' }} onClick={loadMorePosts}>Load More</Button>)
                         : null}
         </ListContainer>

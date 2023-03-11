@@ -20,7 +20,8 @@ interface PropsType {
     toggleMenuPopup: (postId: string) => void,
     showMenu: string | null,
     menuItems: any[],
-    handleDeletePost: () => void
+    handleDeletePost: () => void,
+    refetchPosts: () => void,
 }
 
 const PostCardUI: React.FC<PropsType> = ({
@@ -34,7 +35,8 @@ const PostCardUI: React.FC<PropsType> = ({
     showMenu,
     toggleMenuPopup,
     menuItems,
-    handleDeletePost
+    handleDeletePost,
+    refetchPosts
 }) => {
 
     return (
@@ -69,9 +71,7 @@ const PostCardUI: React.FC<PropsType> = ({
             {shouldEdit === post._id && (
                 <PostFormPopup
                     closePopup={toggleEditPopup}
-                    refetchPosts={function (): void {
-                        throw new Error('Function not implemented.')
-                    }}
+                    refetchPosts={refetchPosts}
                     post={post}
                     heading="Edit Post" />
             )}

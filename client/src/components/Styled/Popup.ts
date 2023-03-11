@@ -85,6 +85,5 @@ export const MenuPopupItem = styled.div`
     &:hover {
         background: ${props => props.theme.floatingShadow};
         border-radius: 4px;
-        color: white;
     }
 `
