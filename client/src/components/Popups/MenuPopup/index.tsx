@@ -11,22 +11,26 @@ interface PropsType {
         disabled: boolean
     }[],
     closeMenu: () => void,
-    trigger: any
+    trigger: any,
+    show: boolean
 }
 
 const MenuPopup: React.FC<PropsType> = ({
     menuItems,
     closeMenu,
-    trigger
+    trigger,
+    show
 }) => {
 
     const menuRef = useRef(null)
+
+    console.log(trigger)
 
     useEffect(() => {
         const handleClose = (e: any) => {
             const menu: any = menuRef.current;
 
-            if(trigger.contains(e.target)) return;
+            if(trigger?.contains(e.target)) return;
             
             if (menu && !menu.contains(e.target)) {
                 closeMenu()
@@ -34,6 +38,8 @@ const MenuPopup: React.FC<PropsType> = ({
         }
         document.addEventListener('mousedown', handleClose)
     }, [])
+
+    if(!show) return null;
 
 
     return (

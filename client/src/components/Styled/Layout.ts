@@ -3,6 +3,33 @@ import styled from "styled-components";
 export const AuthPageLayout = styled.div`
     display: flex;
     height: 100vh;
+
+    .auth-form-section {
+        padding: 16px;
+        flex-basis: 50%;
+    }
+
+    .auth-image-section {
+        flex-basis: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #aefbff;
+
+        img{
+            width: 80%;
+            height: max-content;
+        }
+
+        @media(max-width: 800px) {
+            display: none;
+        }
+    }
+
+    @media(max-width: 800px) {
+        flex-direction: column;
+    }
 `
 
 export const PageLayout = styled.div`

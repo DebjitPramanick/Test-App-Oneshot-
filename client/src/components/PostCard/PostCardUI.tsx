@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { Avatar, Flex } from '../../components/Styled/Shared'
 import { LargeText, SmallText, Text } from '../../components/Styled/Typography'
 import { formatDate } from '../../helpers/data.helper'
-import { UserType } from '../../types/user.type'
+import { UserType } from '../../types'
 import { Card } from './styles'
 import { FiMoreVertical } from 'react-icons/fi'
 import ConfirmPopup from '../Popups/ConfirmPopup'
@@ -64,29 +64,26 @@ const PostCardUI: React.FC<PropsType> = ({
                 <ReadMore>{post.content}</ReadMore>
             </div>
 
-            {shouldDelete === post._id && (
-                <ConfirmPopup
-                    header={'Delete this Post?'}
-                    message={'Are you sure you want to delete this post? Your actions cannot be undone.'}
-                    closePopup={toggleDeletePopup}
-                    onConfirm={handleDeletePost}
-                    onCancel={toggleDeletePopup} />
-            )}
+            <ConfirmPopup
+                header={'Delete this Post?'}
+                message={'Are you sure you want to delete this post? Your actions cannot be undone.'}
+                closePopup={toggleDeletePopup}
+                onConfirm={handleDeletePost}
+                onCancel={toggleDeletePopup}
+                show={shouldDelete === post._id} />
 
-            {shouldEdit === post._id && (
-                <PostFormPopup
-                    closePopup={toggleEditPopup}
-                    refetchPosts={refetchPosts}
-                    post={post}
-                    heading="Edit Post" />
-            )}
+            <PostFormPopup
+                closePopup={toggleEditPopup}
+                refetchPosts={refetchPosts}
+                post={post}
+                heading="Edit Post"
+                show={shouldEdit === post._id} />
 
-            {showMenu === post._id && (
-                <MenuPopup
-                    menuItems={menuItems}
-                    closeMenu={toggleMenuPopup}
-                    trigger={triggerRef.current} />
-            )}
+            <MenuPopup
+                menuItems={menuItems}
+                closeMenu={toggleMenuPopup}
+                trigger={triggerRef.current}
+                show={showMenu === post._id} />
         </Card>
     )
 }

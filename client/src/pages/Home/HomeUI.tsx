@@ -56,11 +56,10 @@ const HomeUI: React.FC<PropsType> = ({
                 </>
             )}
 
-            {showCreatePopUp && (
-                <PostFormPopUp
-                    closePopup={toggleCreatePopUp}
-                    refetchPosts={refetchPosts} />
-            )}
+            <PostFormPopUp
+                closePopup={toggleCreatePopUp}
+                refetchPosts={refetchPosts}
+                show={showCreatePopUp} />
         </PageLayout>
     )
 }

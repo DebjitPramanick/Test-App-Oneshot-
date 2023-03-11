@@ -3,8 +3,16 @@ import { LargeText, SmallText } from '../../../../components/Styled/Typography'
 import { useUser } from '../../../../contexts/UserContext'
 import { Container } from './styles'
 import { MdOutlineAdminPanelSettings } from 'react-icons/md'
+import { Button } from '../../../../components/Styled/Form'
+import { AiOutlineDelete } from 'react-icons/ai'
 
-const ProfileBoxUI = () => {
+interface PropsType {
+  togglePopup: () => void
+}
+
+const ProfileBoxUI: React.FC<PropsType> = ({
+  togglePopup
+}) => {
 
   const { user } = useUser()
 
@@ -21,6 +29,12 @@ const ProfileBoxUI = () => {
           </AdminTag>
         )}
       </div>
+
+      <Button style={{ width: '100%', marginTop: '20px' }}
+        onClick={togglePopup}>
+        <AiOutlineDelete size={20} />
+        Delete Account
+      </Button>
     </Container>
   )
 }

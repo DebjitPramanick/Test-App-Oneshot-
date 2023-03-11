@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserType } from '../../types/user.type';
+import { UserType } from '../../types';
 import UserCardUI from './UserCardUI'
 
 interface PropsType {

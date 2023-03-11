@@ -1,6 +1,7 @@
 import User from "./user.model";
 import jwt from 'jsonwebtoken';
 import { POSTS_LIMIT, SECRET_KEY, TOKEN_EXP } from "../../constants";
+import Post from "../post/post.model";
 
 export const createUserHelper = async (data: any) => {
     try {
@@ -56,6 +57,7 @@ export const getUserByEmailHelper = async (email: string) => {
 export const deleteUserHelper = async (userId: any) => {
     try {
         await User.findByIdAndDelete(userId);
+        await Post.deleteMany({user: userId})
     } catch (error: any) {
         throw new Error(error)
     }

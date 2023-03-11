@@ -7,3 +7,12 @@ export interface UserType {
     created_at: string,
     updatedAt: string
 }
+
+export interface PostType {
+    _id: string,
+    title: string,
+    content: string,
+    user: string,
+    created_at: string,
+    updatedAt: string
+}

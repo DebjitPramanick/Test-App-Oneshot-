@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Button } from '../../Styled/Form';
 import { Overlay, PopupContainer, PopupBody, PopupHeader } from '../../Styled/Popup';
@@ -6,6 +6,7 @@ import { Flex } from '../../Styled/Shared';
 import { SubHeading, Text } from '../../Styled/Typography';
 
 interface PropsType {
+    show: boolean,
     header: string,
     message: string,
     closePopup: () => void;
@@ -14,12 +15,24 @@ interface PropsType {
 }
 
 const ConfirmPopup: React.FC<PropsType> = ({
+    show,
     header,
     message,
     closePopup,
     onCancel,
     onConfirm
 }) => {
+
+    useEffect(() => {
+      if(show){
+        document.body.style.overflowY = 'hidden'
+      } else {
+        document.body.style.overflowY = 'scroll'
+      }
+    }, [show])
+
+    if(!show) return null;
+
     return (
         <Overlay>
             <PopupContainer>

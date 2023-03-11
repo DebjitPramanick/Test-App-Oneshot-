@@ -1,9 +1,9 @@
-import React from 'react'
-import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useUser } from '../../contexts/UserContext';
 import { checkIfUserExists, createUser, loginUser } from '../../api/user.api';
 import { toast } from 'react-toastify'
-import jwt_decode from "jwt-decode";
+import AuthUI from './AuthUI';
+import { fetchGoogleUser } from '../../api/google.api';
 
 const Auth = () => {
 
@@ -41,30 +41,32 @@ const Auth = () => {
         }
     }
 
+    const onSuccessHandler = async (codeResponse: any) => {
+        try {
+            const credToken = codeResponse.access_token || ""
+            const data: any = await fetchGoogleUser(credToken);
+            const result: any = await checkIfUserExists(data.email)
+            if (result.exists) {
+                await handleLoginUser(result.userId)
+            } else {
+                await registerUser(data)
+            }
+        } catch (error: any) {
+            toast.error("Google login error.", {
+                autoClose: 3500,
+                pauseOnHover: true
+            })
+        }
+
+    }
+
+    const googleAuthHanlder = useGoogleLogin({
+        onSuccess: onSuccessHandler,
+    });
+
     return (
-        <div>
-            <GoogleLogin
-                onSuccess={async (credentialResponse) => {
-                    const credToken = credentialResponse.credential || ""
-                    const data: any = jwt_decode(credToken);
-                    const result: any = await checkIfUserExists(data.email)
-                    console.log("RES ==> ", result)
-                    if(result.exists){
-                        await handleLoginUser(result.userId)
-                    } else {
-                        await registerUser(data)
-                    }
-                }}
-                onError={() => {
-                    toast.error("Login failed!", {
-                        autoClose: 3500,
-                        pauseOnHover: true
-                    })
-                }}
-                cancel_on_tap_outside={true}
-                auto_select={false}
-            />;
-        </div>
+        <AuthUI
+            authHandler={googleAuthHanlder} />
     )
 }
 

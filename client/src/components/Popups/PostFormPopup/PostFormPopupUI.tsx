@@ -5,6 +5,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Button, Input, TextArea } from '../../Styled/Form';
 import { SubHeading, Text } from '../../Styled/Typography';
 import { useUser } from '../../../contexts/UserContext';
+import Loader from '../../Loader';
 
 interface PropsType {
     closePopup: () => void,
@@ -56,11 +57,13 @@ const PostFormPopupUI: React.FC<PropsType> = ({
 
                         {isEditting ? (
                             <Button onClick={editPostData} style={{ width: '100%', marginTop: '10px' }}>
-                                {!uploading ? 'Update' : 'Updating...'}
+                                {uploading ? <Loader type='normal' /> : null}
+                                {!uploading ? 'Updating...' : 'Update'}
                             </Button>
                         ) : (
                             <Button onClick={uploadPostData} style={{ width: '100%', marginTop: '10px' }}>
-                                {!uploading ? 'Post' : 'Posting...'}
+                                {uploading ? <Loader type='normal' /> : null}
+                                {uploading ? 'Posting...' : 'Post'}
                             </Button>
                         )}
                     </div>

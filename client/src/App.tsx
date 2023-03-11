@@ -29,7 +29,8 @@ function App() {
             <UserProvider>
               <div className="App">
                 <Router>
-                  <ToastContainer />
+                  <ToastContainer theme={theme === 'light' ? 'light' : 'dark'}
+                  style={{zIndex: 99999}}/>
                   <Header />
                   <Routes>
                     <Route path='/auth' element={

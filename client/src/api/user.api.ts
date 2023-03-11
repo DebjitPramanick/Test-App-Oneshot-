@@ -55,3 +55,12 @@ export const checkIfUserExists = async (email: string) => {
         throw new Error(message)
     }
 }
+
+export const deleteUser = async (userId: string) => {
+    try {
+        await api.delete(`/user/delete/${userId}`)
+    } catch (error: any) {
+        const message = error.response.data.message;
+        throw new Error(message)
+    }
+}

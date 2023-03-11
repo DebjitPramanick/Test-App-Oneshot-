@@ -62,7 +62,10 @@ export const Button = styled.button`
     line-height: 12px;
     letter-spacing: -0.02em;
     cursor: pointer;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background: ${props => props.theme.background};
     border: 1px solid ${props => props.theme.buttonBorder};
     color: ${props => props.theme.text};
@@ -86,4 +89,30 @@ export const SearchButton = styled.button`
     display: block;
     color: ${props => props.theme.text};
     background: transparent
+`
+
+export const GoogleButton = styled.button`
+    outline: 0;
+    width: 100%;
+    height: 39px;
+    border-radius: 4px;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 12px;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    gap: 10px;
+    background: ${props => props.theme.background};
+    border: 1px solid ${props => props.theme.buttonBorder};
+    color: ${props => props.theme.text};
+    transition: 0.5s;
+
+    &:hover {
+        background: ${props => props.theme.buttonHover};
+        color: white
+    }
 `

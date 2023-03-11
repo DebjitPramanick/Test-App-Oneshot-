@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getUser } from '../../api/user.api';
 import { deletePost } from '../../api/post.api'
-import { UserType } from '../../types/user.type';
+import { UserType } from '../../types';
 import PostCardUI from './PostCardUI'
 import { toast } from 'react-toastify'
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
