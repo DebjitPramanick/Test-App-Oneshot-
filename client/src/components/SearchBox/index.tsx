@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SearchBoxUI from './SearchBoxUI'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useMenu } from '../../contexts/MenuContext'
@@ -13,8 +13,8 @@ const SearchBox = () => {
 
     const navigate = useNavigate()
 
-    const goToSearch = (key: string) => {
-        if(key === 'Enter' && query) {
+    const goToSearch = (key?: string, click?: boolean) => {
+        if((key === 'Enter' || click) && query) {
             toggleMenu(false)
             navigate(`/search?query=${query}`)
         }

@@ -1,13 +1,11 @@
 import React from 'react'
 import { SearchContainer } from './styles'
 import { AiOutlineSearch } from 'react-icons/ai';
-import { Button, Input, SearchButton } from '../Styled/Form';
-import { useNavigate } from 'react-router-dom';
-
+import { Input, SearchButton } from '../Styled/Form';
 interface PropsType {
     query: string,
     handleQuery: (val: string) => void;
-    goToSearch: (key: string) => void
+    goToSearch: (key?: string, click?: boolean) => void
 }
 
 const SearchBoxUI: React.FC<PropsType> = ({
@@ -15,15 +13,14 @@ const SearchBoxUI: React.FC<PropsType> = ({
     handleQuery,
     goToSearch
 }) => {
-    const navigate = useNavigate()
     return (
         <SearchContainer>
             <Input placeholder='Search posts or users'
                 style={{ outline: 0 }}
                 value={query}
                 onChange={(e) => handleQuery(e.target.value)}
-                onKeyDown={() => goToSearch(query)} />
-            <SearchButton onClick={() =>  navigate(`/search?query=${query}`)}>
+                onKeyDown={(e) => goToSearch(e.key)} />
+            <SearchButton onClick={() => goToSearch(undefined, true)}>
                 <AiOutlineSearch size={20} />
             </SearchButton>
         </SearchContainer>
