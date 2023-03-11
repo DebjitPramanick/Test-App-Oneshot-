@@ -27,16 +27,24 @@ export const getPostHelper = async (postId?: string, page: number = 1) => {
     }
 }
 
-export const searchPostsHelper = async (field: 'title' | 'userId', queryVal: string) => {
+export const searchPostsHelper = async (field: 'title' | 'userId', queryVal: string, page: number = 1) => {
     try {
-        let posts= []
+        let posts = []
+        let count = 0
+        const sikpCount = (page - 1) * POSTS_LIMIT;
+
         if (field === 'title') {
-            posts = await Post.find({ title: { $regex: `.*${queryVal}.*`, $options: 'i' } });
-        } else {
-            posts = await Post.find({user: queryVal});
+            posts = await Post.find({ title: { $regex: `.*${queryVal}.*`, $options: 'i' } })
+                .sort({ createdAt: -1 }).skip(sikpCount).limit(POSTS_LIMIT);
+            count = await Post.find({ title: { $regex: `.*${queryVal}.*`, $options: 'i' } }).count()
+        } 
+        else {
+            posts = await Post.find({ user: queryVal })
+                .sort({ createdAt: -1 }).skip(sikpCount).limit(POSTS_LIMIT);
+            count = await Post.find({ user: queryVal }).count()
         }
 
-        return posts;
+        return {posts, count};
     } catch (error: any) {
         throw new Error(error)
     }

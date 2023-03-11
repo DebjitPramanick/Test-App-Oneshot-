@@ -12,6 +12,20 @@ const Search = () => {
         users: [],
         posts: []
     })
+    const [pageNum, setPageNum] = useState<{
+        users: number, 
+        posts: number}
+    >({
+        users: 1,
+        posts: 1
+    });
+    const [allFetched, setAllFetched] = useState<{
+        users: boolean, 
+        posts: boolean}
+    >({
+        users: false,
+        posts: false
+    })
 
     const params = useSearchParams()
     const query = params[0].get('query')
@@ -33,12 +47,19 @@ const Search = () => {
     ]
 
     const searchQuery = async () => {
-        if(!query) return;
+        if (!query) return;
         setFetching(true)
         try {
             const resUsers: any = await searchUsers(query)
             const resPosts: any = await searchPosts(query)
             setResults({ users: resUsers.users, posts: resPosts.posts })
+            if(resPosts.posts.length >= resPosts.total) {
+                setAllFetched({...allFetched, posts: true})
+            }
+            if(resUsers.users.length >= resUsers.total) {
+                setAllFetched({...allFetched, users: true})
+            }
+            setPageNum({users: pageNum.users+1, posts: pageNum.posts+1})
             setFetching(false)
         } catch (error: any) {
             toast.error(error.message, {
@@ -49,7 +70,34 @@ const Search = () => {
         }
     }
 
-    console.log(results)
+    const loadMoreResults = async (type: 'users' | 'posts') => {
+        if (!query) return;
+        setFetching(true)
+        try {
+            if (type === 'posts') {
+                const resPosts: any = await searchPosts(query, undefined, pageNum.posts)
+                const newPosts = results.posts.concat(resPosts.posts)
+                if (resPosts.total >= newPosts.length) setAllFetched({...allFetched, posts: true})
+                setResults({...results, posts: newPosts})
+                setPageNum({...pageNum, posts: pageNum.posts+1})
+            } else {
+                const resUsers: any = await searchUsers(query, pageNum.users)
+                const newUsers = results.users.concat(resUsers.users)
+                if (resUsers.total >= newUsers.length) setAllFetched({...allFetched, users: true})
+                setResults({...results, users: newUsers})
+                setPageNum({...pageNum, users: pageNum.users+1})
+            }
+            setFetching(false)
+        } catch (error) {
+            toast.error("Error occurred!", {
+                autoClose: 3500,
+                pauseOnHover: true
+            })
+            setFetching(false)
+        }
+    }
+
+    console.log(allFetched, pageNum)
 
     return (
         <SearchUI
@@ -57,7 +105,9 @@ const Search = () => {
             activeTab={currentTab}
             selectTab={(num) => setCurrentTab(num)}
             results={results}
-            fetching={fetching} />
+            fetching={fetching}
+            loadMoreResults={loadMoreResults}
+            allFetched={allFetched} />
     )
 }
 

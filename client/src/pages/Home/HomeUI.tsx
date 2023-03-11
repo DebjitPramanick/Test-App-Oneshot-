@@ -15,7 +15,8 @@ interface PropsType {
     loadMorePosts: () => void,
     toggleCreatePopUp: () => void,
     showCreatePopUp: boolean,
-    loading: boolean
+    loading: boolean,
+    allFetched: boolean
 }
 
 const HomeUI: React.FC<PropsType> = ({
@@ -24,7 +25,8 @@ const HomeUI: React.FC<PropsType> = ({
     loading,
     refetchPosts,
     toggleCreatePopUp,
-    showCreatePopUp
+    showCreatePopUp,
+    allFetched
 }) => {
 
     const { user } = useUser()
@@ -44,7 +46,9 @@ const HomeUI: React.FC<PropsType> = ({
                             <PostCard key={post._id} post={post} />
                         ))}
                     </div>
-                    <Button onClick={loadMorePosts} style={{margin: 'auto'}}>Load More</Button>
+                    {posts.length === 0 ? <Text style={{ textAlign: 'center' }}>No Results found</Text> : (
+                        !allFetched ? <Button onClick={loadMorePosts} style={{ margin: 'auto' }}>Load More</Button> : null
+                    )}
                 </>
             )}
 

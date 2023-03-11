@@ -12,7 +12,9 @@ interface PropsType {
     selectTab: (num: number) => void,
     activeTab: number,
     results: { users: any[], posts: any[] },
-    fetching: boolean
+    fetching: boolean,
+    loadMoreResults: (type: 'users' | 'posts') => void,
+    allFetched: { users: boolean, posts: boolean }
 }
 
 const SearchUI: React.FC<PropsType> = ({
@@ -20,7 +22,9 @@ const SearchUI: React.FC<PropsType> = ({
     selectTab,
     activeTab,
     results,
-    fetching
+    fetching,
+    loadMoreResults,
+    allFetched
 }) => {
 
 
@@ -28,32 +32,31 @@ const SearchUI: React.FC<PropsType> = ({
         <PageLayout>
             <Toggler tabs={tabs} current={activeTab} changeTab={selectTab} />
 
-            {fetching ? (<Loader type='page' />) : (
-                <>
-                    {activeTab === 1 ? (
-                        <div>
-                            <div style={{ marginTop: '16px' }}>
-                                {results.posts.map((post: any) => (
-                                    <PostCard key={post._id} post={post} />
-                                ))}
-                            </div>
-                            {results.posts.length === 0 ? <Text style={{textAlign: 'center'}}>No Results found</Text> : (
-                                <Button style={{ margin: 'auto' }}>Load More</Button>
-                            )}
-                        </div>
-                    ) : (
-                        <div>
-                            <GridLayout style={{ marginTop: '16px' }}>
-                                {results.users.map((user: any) => (
-                                    <UserCard key={user._id} user={user} />
-                                ))}
-                            </GridLayout>
-                            {results.users.length === 0 ? <Text style={{textAlign: 'center'}}>No Results found</Text> : (
-                                <Button style={{ margin: 'auto' }}>Load More</Button>
-                            )}
-                        </div>
-                    )}
-                </>
+            {activeTab === 1 ? (
+                <div>
+                    <div style={{ marginTop: '16px' }}>
+                        {results.posts.map((post: any) => (
+                            <PostCard key={post._id} post={post} />
+                        ))}
+                    </div>
+                    {fetching ? <Loader type='page' />
+                        : results.posts.length === 0 ? <Text style={{ textAlign: 'center' }}>No Results found</Text>
+                            : !allFetched.posts ? (<Button style={{ margin: 'auto' }} onClick={() => loadMoreResults('posts')}>Load More</Button>)
+                                : null}
+                </div>
+            ) : (
+                <div>
+                    <GridLayout style={{ marginTop: '16px' }}>
+                        {results.users.map((user: any) => (
+                            <UserCard key={user._id} user={user} />
+                        ))}
+                    </GridLayout>
+
+                    {fetching ? <Loader type='page' />
+                        : results.users.length === 0 ? <Text style={{ textAlign: 'center' }}>No Results found</Text>
+                            : !allFetched.users ? (<Button style={{ margin: 'auto' }} onClick={() => loadMoreResults('users')}>Load More</Button>)
+                                : null}
+                </div>
             )}
         </PageLayout>
     )

@@ -1,6 +1,6 @@
 import User from "./user.model";
 import jwt from 'jsonwebtoken';
-import { SECRET_KEY, TOKEN_EXP } from "../../constants";
+import { POSTS_LIMIT, SECRET_KEY, TOKEN_EXP } from "../../constants";
 
 export const createUserHelper = async (data: any) => {
     try {
@@ -29,10 +29,16 @@ export const getUserHelper = async (userId: string) => {
     }
 }
 
-export const searchUsersHelper = async (name: string) => {
+export const searchUsersHelper = async (name: string, page: number = 1) => {
     try {
-        const users = await User.find({name: { $regex: `.*${name}.*`, $options: 'i' }});
-        return users;
+        const sikpCount = (page - 1) * POSTS_LIMIT;
+
+        const users = await User.find({ name: { $regex: `.*${name}.*`, $options: 'i' } })
+            .sort({ createdAt: -1 }).skip(sikpCount).limit(POSTS_LIMIT);
+            
+        const count = await User.find({ name: { $regex: `.*${name}.*`, $options: 'i' } }).count();
+
+        return {users, count};
     } catch (error: any) {
         throw new Error(error)
     }
@@ -40,7 +46,7 @@ export const searchUsersHelper = async (name: string) => {
 
 export const getUserByEmailHelper = async (email: string) => {
     try {
-        const user = await User.findOne({email: email});
+        const user = await User.findOne({ email: email });
         return user;
     } catch (error: any) {
         throw new Error(error)
@@ -55,7 +61,7 @@ export const deleteUserHelper = async (userId: any) => {
     }
 }
 
-export const generateToken = async (data: {email: string, userId: string, isAdmin: boolean}) => {
-    const token = jwt.sign(data, SECRET_KEY, {expiresIn: TOKEN_EXP});
+export const generateToken = async (data: { email: string, userId: string, isAdmin: boolean }) => {
+    const token = jwt.sign(data, SECRET_KEY, { expiresIn: TOKEN_EXP });
     return token;
 }

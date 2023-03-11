@@ -12,7 +12,7 @@ export const createPost = async (data: any) => {
     }
 }
 
-export const getAllPosts = async (page: number = 1, limit: number = 10) => {
+export const getAllPosts = async (page: number = 1) => {
     try {
         let result = await api.get(`/post/all?page=${page}`)
         result = result.data;
@@ -23,13 +23,13 @@ export const getAllPosts = async (page: number = 1, limit: number = 10) => {
     }
 }
 
-export const searchPosts = async (title?: string, userId?: string) => {
+export const searchPosts = async (title?: string, userId?: string, page: number = 1) => {
     try {
         let result = null;
         if (title) {
-            result = await api.get(`/post/search?title=${title}`)
+            result = await api.get(`/post/search?title=${title}&page=${page}`)
         } else {
-            result = await api.get(`/post/search?userId=${userId}`)
+            result = await api.get(`/post/search?userId=${userId}&page=${page}`)
         }
         result = result.data;
         return result;

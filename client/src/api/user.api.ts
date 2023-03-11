@@ -22,9 +22,9 @@ export const getUser = async (userId: string) => {
     }
 }
 
-export const searchUsers = async (name: string) => {
+export const searchUsers = async (name: string, page: number = 1) => {
     try {
-        let result = await api.get(`/user/search?name=${name}`)
+        let result = await api.get(`/user/search?name=${name}&page=${page}`)
         result = result.data;
         return result;
     } catch (error: any) {

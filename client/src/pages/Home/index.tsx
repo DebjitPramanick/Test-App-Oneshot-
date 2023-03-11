@@ -9,6 +9,7 @@ const Home = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [loading, setLoading] = useState(false)
   const [showCreatePopUp, setShowCreatePopUp] = useState(false)
+  const [allFetched, setAllFetched] = useState(false)
 
   useEffect(() => {
     fetchAllPosts()
@@ -20,6 +21,7 @@ const Home = () => {
     try {
       const data: any= await getAllPosts()
       setPosts(data.posts)
+      if(data.total === data.posts.length) setAllFetched(true)
       setPageNum(pageNum + 1)
       setLoading(false)
     } catch (error) {
@@ -36,6 +38,7 @@ const Home = () => {
     try {
       const data: any = await getAllPosts(pageNum)
       const newPosts = posts.concat(data.posts)
+      if(data.total >= newPosts.length) setAllFetched(true)
       setPosts(newPosts)
       setPageNum(pageNum + 1)
     } catch (error) {
@@ -54,6 +57,7 @@ const Home = () => {
       loading={loading}
       toggleCreatePopUp={() => setShowCreatePopUp(!showCreatePopUp)}
       showCreatePopUp={showCreatePopUp}
+      allFetched={allFetched}
     />
   )
 }

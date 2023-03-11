@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { generateToken, createUserHelper, getUserHelper, deleteUserHelper, getUserByEmailHelper, loginUserHelper, searchUsersHelper } from "./user.helpers";
 import logger from "../../utils/logger.util";
-import { ObjectId } from "mongodb";
 
 export const createUserController = async (req: Request, res: Response) => {
     try {
@@ -119,13 +118,14 @@ export const getUserByIDController = async (req: Request, res: Response) => {
 export const searchUsersController = async (req: Request, res: Response) => {
     try {
         const { name }: any = req.query;
-        const users: any = await searchUsersHelper(name);
+        const data: {users: any[], count: number} = await searchUsersHelper(name);
 
         logger.info(`Fetched users whose names include: ${name}`)
 
         res.status(200).json({
             message: "Users found.",
-            users: users
+            users: data.users,
+            total: data.count
         });
     } catch (error) {
         logger.error(error, "Error getting user")

@@ -77,21 +77,22 @@ export const getAllPostsController = async (req: Request, res: Response) => {
 
 export const searchPostsByController = async (req: Request, res: Response) => {
     try {
-        const { title, userId }: any = req.query;
+        const { title, userId, page }: any = req.query;
 
-        let posts: any[] = [];
+        let data: {posts: any[], count: number} = {posts: [], count: 0};
 
         if(title) {
-            posts = await searchPostsHelper('title', title);
+            data = await searchPostsHelper('title', title, page);
         } else if(userId) {
-            posts = await searchPostsHelper('userId', userId);
+            data = await searchPostsHelper('userId', userId, page);
         }
 
         logger.info(`Fetched posts whose titles include: ${title}`)
 
         res.status(200).json({
             message: "Posts found.",
-            posts: posts
+            posts: data.posts,
+            total: data.count
         });
     } catch (error) {
         logger.error(error, "Error getting user")
