@@ -53,7 +53,6 @@ export const TextArea = styled.textarea`
 `
 
 export const Button = styled.button`
-    border: 0;
     outline: 0;
     width: 150px;
     height: 39px;
@@ -73,4 +72,18 @@ export const Button = styled.button`
         background: ${props => props.theme.buttonHover};
         color: white
     }
+`
+
+export const SearchButton = styled.button`
+    border: 0;
+    outline: 0;
+    border-radius: 4px;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 12px;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    display: block;
+    color: ${props => props.theme.text};
+    background: transparent
 `

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
-import { AiOutlineLogout } from 'react-icons/ai'
+import { AiOutlineHome, AiOutlineLogout } from 'react-icons/ai'
+import {CgProfile} from 'react-icons/cg'
 import { useNavigate } from 'react-router-dom'
 import ReactSwitch from 'react-switch'
 import { useMenu } from '../../contexts/MenuContext'
@@ -67,9 +68,11 @@ const HeaderUI: React.FC<PropsType> = ({
                         </MenuPopupItem>
 
                         <MenuPopupItem onClick={() => goTo("/")}>
+                            <AiOutlineHome size={20}/>
                             <Text>Home</Text>
                         </MenuPopupItem>
                         <MenuPopupItem onClick={() => goTo("/profile")}>
+                            <CgProfile size={20}/>
                             <Text>Profile</Text>
                         </MenuPopupItem>
 
