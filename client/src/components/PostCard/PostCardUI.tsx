@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { Avatar, Flex } from '../../components/Styled/Shared'
 import { LargeText, SmallText, Text } from '../../components/Styled/Typography'
 import { formatDate } from '../../helpers/data.helper'
-import { UserType } from '../../types'
+import { PostType, UserType } from '../../types'
 import { Card } from './styles'
 import { FiMoreVertical } from 'react-icons/fi'
 import ConfirmPopup from '../Popups/ConfirmPopup'
@@ -11,7 +11,7 @@ import PostFormPopup from '../Popups/PostFormPopup'
 import ReadMore from '../ReadMore'
 
 interface PropsType {
-    post: any,
+    post: PostType,
     postUser: UserType | null,
     actions: boolean,
     toggleEditPopup: (postId?: string) => void,
@@ -49,12 +49,12 @@ const PostCardUI: React.FC<PropsType> = ({
                     <Avatar src={postUser?.profile_pic || ""} width={40} />
                     <div>
                         <Text style={{ marginBottom: '4px' }}>{postUser?.name}</Text>
-                        <SmallText>{formatDate(post.createdAt)}</SmallText>
+                        <SmallText>{formatDate(post?.createdAt)}</SmallText>
                     </div>
                 </Flex>
                 {actions &&
                     <div ref={triggerRef}><FiMoreVertical
-                        onClick={() => toggleMenuPopup(!showMenu ? post._id : null)}
+                        onClick={() => toggleMenuPopup(post._id)}
                         size={20}
                         cursor="pointer"
                     /></div>}

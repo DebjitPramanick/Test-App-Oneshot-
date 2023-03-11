@@ -10,7 +10,7 @@ import Loader from '../../Loader';
 interface PropsType {
     closePopup: () => void,
     handlePostData: (val: string, field: 'title' | 'content') => void,
-    post: any,
+    post: {title: string, content: string, user: string},
     uploadPostData: () => void,
     editPostData: () => void
     uploading: boolean,

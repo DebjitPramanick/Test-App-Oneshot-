@@ -9,7 +9,7 @@ const initialUser: UserType = {
     email: "",
     profile_pic: "",
     isAdmin: false,
-    created_at: "",
+    createdAt: "",
     updatedAt: ""
 }
 

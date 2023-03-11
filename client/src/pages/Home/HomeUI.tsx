@@ -8,6 +8,7 @@ import { Text } from '../../components/Styled/Typography'
 import { useUser } from '../../contexts/UserContext'
 import PostCard from '../../components/PostCard'
 import { CreatePostContainer } from './styles'
+import { PostType } from '../../types'
 
 interface PropsType {
     posts: any[],
@@ -42,7 +43,7 @@ const HomeUI: React.FC<PropsType> = ({
             {loading ? (<Loader type='page' />) : (
                 <>
                     <div style={{ marginTop: '16px' }}>
-                        {posts.map((post: any) => (
+                        {posts.map((post: PostType) => (
                             <PostCard
                                 key={post._id}
                                 post={post}

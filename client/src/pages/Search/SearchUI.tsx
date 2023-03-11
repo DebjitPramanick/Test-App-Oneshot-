@@ -6,6 +6,7 @@ import { GridLayout, PageLayout } from '../../components/Styled/Layout'
 import { Text } from '../../components/Styled/Typography'
 import Toggler from '../../components/Toggler'
 import UserCard from '../../components/UserCard'
+import { PostType } from '../../types'
 
 interface PropsType {
     tabs: any[],
@@ -35,7 +36,7 @@ const SearchUI: React.FC<PropsType> = ({
             {activeTab === 1 ? (
                 <div>
                     <div style={{ marginTop: '16px' }}>
-                        {results.posts.map((post: any) => (
+                        {results.posts.map((post: PostType) => (
                             <PostCard key={post._id} post={post} />
                         ))}
                     </div>

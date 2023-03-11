@@ -4,8 +4,8 @@ export interface UserType {
     email: string,
     profile_pic: string,
     isAdmin: boolean,
-    created_at: string,
-    updatedAt: string
+    createdAt?: string,
+    updatedAt?: string
 }
 
 export interface PostType {
@@ -13,6 +13,6 @@ export interface PostType {
     title: string,
     content: string,
     user: string,
-    created_at: string,
+    createdAt: string,
     updatedAt: string
 }
