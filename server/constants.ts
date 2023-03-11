@@ -7,7 +7,7 @@ export const SECRET_KEY = process.env.JWT_SECRET_KEY || "SECRET"
 
 export const TOKEN_EXP = '24h'
 
-export const PORT = process.env.PORT || 8081
+export const PORT = process.env.PORT || 8080
 
 export const MONGO_URI = process.env.MONGO_URI || ""
 

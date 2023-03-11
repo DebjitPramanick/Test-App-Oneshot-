@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {ObjectId} from 'mongodb'
 import logger from "../../utils/logger.util";
-import { createPostHelper, deletePostHelper, getPostHelper, getPostsByTitleHelper } from "./post.helpers";
+import { createPostHelper, deletePostHelper, getPostHelper, searchPostsHelper } from "./post.helpers";
 
 export const createPostController = async (req: Request, res: Response) => {
     try {
@@ -75,10 +75,17 @@ export const getAllPostsController = async (req: Request, res: Response) => {
     }
 }
 
-export const getPostsByTitleController = async (req: Request, res: Response) => {
+export const searchPostsByController = async (req: Request, res: Response) => {
     try {
-        const { title }: any = req.query;
-        const posts: any = await getPostsByTitleHelper(title);
+        const { title, userId }: any = req.query;
+
+        let posts: any[] = [];
+
+        if(title) {
+            posts = await searchPostsHelper('title', title);
+        } else if(userId) {
+            posts = await searchPostsHelper('userId', userId);
+        }
 
         logger.info(`Fetched posts whose titles include: ${title}`)
 

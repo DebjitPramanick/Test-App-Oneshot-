@@ -14,3 +14,9 @@ export const PageLayout = styled.div`
         margin: 70px 16px;
     }
 `
+
+export const GridLayout = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    column-gap: 16px
+`

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { generateToken, createUserHelper, getUserHelper, deleteUserHelper, getUserByEmailHelper, loginUserHelper, getUsersByNameHelper } from "./user.helpers";
+import { generateToken, createUserHelper, getUserHelper, deleteUserHelper, getUserByEmailHelper, loginUserHelper, searchUsersHelper } from "./user.helpers";
 import logger from "../../utils/logger.util";
 import { ObjectId } from "mongodb";
 
@@ -116,10 +116,10 @@ export const getUserByIDController = async (req: Request, res: Response) => {
     }
 }
 
-export const getUsersByNameController = async (req: Request, res: Response) => {
+export const searchUsersController = async (req: Request, res: Response) => {
     try {
         const { name }: any = req.query;
-        const users: any = await getUsersByNameHelper(name);
+        const users: any = await searchUsersHelper(name);
 
         logger.info(`Fetched users whose names include: ${name}`)
 

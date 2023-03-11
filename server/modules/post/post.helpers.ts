@@ -17,20 +17,26 @@ export const getPostHelper = async (postId?: string, page: number = 1) => {
             return post;
         } else {
             const sikpCount = (page - 1) * POSTS_LIMIT;
-            const posts = await Post.find({}).sort({createdAt: -1}).skip(sikpCount).limit(POSTS_LIMIT);
+            const posts = await Post.find({}).sort({ createdAt: -1 }).skip(sikpCount).limit(POSTS_LIMIT);
             const count = await Post.find({}).count()
 
-            return {posts, count};
+            return { posts, count };
         }
     } catch (error: any) {
         throw new Error(error)
     }
 }
 
-export const getPostsByTitleHelper = async (title: string) => {
+export const searchPostsHelper = async (field: 'title' | 'userId', queryVal: string) => {
     try {
-        const users = await Post.find({title: { $regex: `.*${title}.*`, $options: 'i' }});
-        return users;
+        let posts= []
+        if (field === 'title') {
+            posts = await Post.find({ title: { $regex: `.*${queryVal}.*`, $options: 'i' } });
+        } else {
+            posts = await Post.find({user: queryVal});
+        }
+
+        return posts;
     } catch (error: any) {
         throw new Error(error)
     }

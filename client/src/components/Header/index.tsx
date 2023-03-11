@@ -1,4 +1,4 @@
-import { useMobile } from '../../contexts/MobileContext'
+import { useMenu } from '../../contexts/MenuContext'
 import { useThemeMode } from '../../contexts/ThemeModeContext'
 import { googleLogout } from '@react-oauth/google'
 import { useLocation } from 'react-router-dom'
@@ -10,7 +10,7 @@ import HeaderUI from './HeaderUI'
 const Header = () => {
 
   const { selectTheme, theme } = useThemeMode()
-  const { showMenu, toggleMobileMenu } = useMobile()
+  const { showMenu, toggleMenu } = useMenu()
   const { logoutUser } = useUser()
   const location = useLocation()
   const navigate = useNavigate()
@@ -30,13 +30,13 @@ const Header = () => {
   const handleLogout = () => {
     googleLogout()
     logoutUser()
-    toggleMobileMenu(!showMenu)
+    toggleMenu(!showMenu)
     navigate("/auth")
   }
 
   const goTo = (path: string) => {
     navigate(path)
-    toggleMobileMenu(!showMenu)
+    toggleMenu(!showMenu)
   }
 
   return (

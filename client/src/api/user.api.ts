@@ -22,6 +22,17 @@ export const getUser = async (userId: string) => {
     }
 }
 
+export const searchUsers = async (name: string) => {
+    try {
+        let result = await api.get(`/user/search?name=${name}`)
+        result = result.data;
+        return result;
+    } catch (error: any) {
+        const message = error.response.data.message;
+        throw new Error(message)
+    }
+}
+
 export const loginUser = async (userId: string) => {
     try {
         const data = { userId: userId }

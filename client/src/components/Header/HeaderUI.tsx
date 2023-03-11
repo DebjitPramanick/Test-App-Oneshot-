@@ -1,9 +1,10 @@
 import React from 'react'
 import { AiOutlineLogout } from 'react-icons/ai'
 import ReactSwitch from 'react-switch'
-import { useMobile } from '../../contexts/MobileContext'
+import { useMenu } from '../../contexts/MenuContext'
 import { useThemeMode } from '../../contexts/ThemeModeContext'
 import { useUser } from '../../contexts/UserContext'
+import SearchBox from '../SearchBox'
 import { Button } from '../Styled/Form'
 import { Avatar, Flex } from '../Styled/Shared'
 import { Heading, Text } from '../Styled/Typography'
@@ -22,7 +23,7 @@ const HeaderUI: React.FC<PropsType> = ({
 }) => {
 
     const { theme } = useThemeMode()
-    const { showMenu, toggleMobileMenu } = useMobile()
+    const { showMenu, toggleMenu } = useMenu()
     const { user } = useUser()
 
     return (
@@ -32,8 +33,9 @@ const HeaderUI: React.FC<PropsType> = ({
                 <Heading>Test App</Heading>
                 <div className='header-search-container' style={{ width: '100%' }}>
                     {/* <SearchBar type='header' /> */}
+                    <SearchBox />
                 </div>
-                <Avatar src={user.profile_pic} width={36} border={2} onClick={() => toggleMobileMenu(!showMenu)} />
+                <Avatar src={user.profile_pic} width={36} border={2} onClick={() => toggleMenu(!showMenu)} />
 
                 <FloatingContainer height={"fit-content"}
                     className={`${showMenu ? 'expand' : 'collapse'}`}>

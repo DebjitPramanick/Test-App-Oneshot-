@@ -29,7 +29,7 @@ export const getUserHelper = async (userId: string) => {
     }
 }
 
-export const getUsersByNameHelper = async (name: string) => {
+export const searchUsersHelper = async (name: string) => {
     try {
         const users = await User.find({name: { $regex: `.*${name}.*`, $options: 'i' }});
         return users;
